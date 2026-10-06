@@ -288,7 +288,7 @@ const en: Dictionary = {
         initials: "MA",
         role: "Chemical Engineer · Co-founder",
         bio: "Business management and improvement, focused on technical solutions that bring order to operations.",
-        photo: "",
+        photo: "/team/maria.jpg",
         photoAlt: "María Celeste Amaya",
       },
     ],
