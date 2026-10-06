@@ -280,7 +280,7 @@ const en: Dictionary = {
         initials: "FS",
         role: "Chemical Engineer · Co-founder",
         bio: "Environmental management, management systems, sustainability and process improvement.",
-        photo: "",
+        photo: "/team/fabiola.jpg",
         photoAlt: "Fabiola Sosa Duarte",
       },
       {

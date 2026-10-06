@@ -288,7 +288,7 @@ const es: Dictionary = {
         initials: "FS",
         role: "Ingeniera Química · Cofundadora",
         bio: "Gestión ambiental, sistemas de gestión, sostenibilidad y mejora de procesos.",
-        photo: "",
+        photo: "/team/fabiola.jpg",
         photoAlt: "Ing. Fabiola Sosa Duarte",
       },
       {
