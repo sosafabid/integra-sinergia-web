@@ -2,7 +2,9 @@ import type { Dictionary } from "@/content/types";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { ArrowIcon } from "@/components/ui/icons";
-import { AreaCtaLink } from "./WebQuoteLink";
+import { ButtonLink } from "@/components/ui/ButtonLink";
+import type { Locale } from "@/i18n/config";
+import { contactRoute } from "@/lib/routes";
 
 const exampleIcons = [
   // calendario / vencimientos
@@ -15,13 +17,13 @@ const exampleIcons = [
   <path key="d" d="M5 6h14v9H9l-4 4zM9 10.5h.01M12 10.5h.01M15 10.5h.01" />,
 ];
 
-export function Automation({ dict }: { dict: Dictionary }) {
+export function Automation({ dict, lang }: { dict: Dictionary; lang: Locale }) {
   const { automation: a } = dict;
 
   return (
     <section id="automatizacion" aria-labelledby="automatizacion-title" className="bg-sand-100 py-24 lg:py-36">
       <div className="container-site">
-        <SectionHeader id="automatizacion-title" index="06" kicker={a.kicker} title={a.title} lead={a.lead} align="split" />
+        <SectionHeader id="automatizacion-title" kicker={a.kicker} title={a.title} lead={a.lead} align="split" />
 
         {/* Flujo: del orden a la capacidad */}
         <Reveal className="mt-16 lg:mt-20">
@@ -61,7 +63,7 @@ export function Automation({ dict }: { dict: Dictionary }) {
               {a.principle}
             </blockquote>
             <div className="mt-8">
-              <AreaCtaLink label={a.cta} area="automatizacion" variant="primary" />
+              <ButtonLink href={contactRoute(lang, "automatizacion")}>{a.cta}</ButtonLink>
             </div>
           </Reveal>
 

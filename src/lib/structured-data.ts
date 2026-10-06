@@ -1,10 +1,8 @@
 import { siteConfig } from "@/config/site";
 import type { Dictionary } from "@/content/types";
-import type { Locale } from "@/i18n/config";
 
 /** Datos estructurados (schema.org) para buscadores. Solo información verificable. */
-export function buildJsonLd(lang: Locale, dict: Dictionary) {
-  const url = `${siteConfig.url}/${lang}`;
+export function buildJsonLd(dict: Dictionary) {
   const orgId = `${siteConfig.url}/#organization`;
   return {
     "@context": "https://schema.org",
@@ -41,16 +39,6 @@ export function buildJsonLd(lang: Locale, dict: Dictionary) {
         name: siteConfig.name,
         inLanguage: ["es-CR", "en"],
         publisher: { "@id": orgId },
-      },
-      {
-        "@type": "WebPage",
-        "@id": `${url}#webpage`,
-        url,
-        name: dict.meta.title,
-        description: dict.meta.description,
-        inLanguage: lang === "es" ? "es-CR" : "en",
-        isPartOf: { "@id": `${siteConfig.url}/#website` },
-        about: { "@id": orgId },
       },
     ],
   };

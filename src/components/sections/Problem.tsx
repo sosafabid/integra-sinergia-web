@@ -12,7 +12,7 @@ export function Problem({ dict }: { dict: Dictionary }) {
       <div className="container-site grid gap-14 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-5">
           <div className="lg:sticky lg:top-32">
-            <SectionHeader id="problema-title" index="01" kicker={problem.kicker} title={problem.title} />
+            <SectionHeader id="problema-title" kicker={problem.kicker} title={problem.title} />
             <Reveal delay={120}>
               <p className="lead mt-6 text-ink-soft">{problem.lead}</p>
             </Reveal>

@@ -13,7 +13,7 @@ export function WhatsAppFloat({ href, label }: { href: string; label: string }) 
   useEffect(() => {
     const contact = document.getElementById("contacto");
     let contactInView = false;
-    const update = () => setVisible(window.scrollY > window.innerHeight * 0.7 && !contactInView);
+    const update = () => setVisible(window.scrollY > 160 && !contactInView);
     const observer = contact
       ? new IntersectionObserver(([entry]) => {
           contactInView = entry.isIntersecting;

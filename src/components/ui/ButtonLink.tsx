@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { AnchorHTMLAttributes, ReactNode } from "react";
 import { ArrowIcon } from "./icons";
 
@@ -22,14 +23,28 @@ type Props = AnchorHTMLAttributes<HTMLAnchorElement> & {
 };
 
 /** Enlace con apariencia de botón (los CTA del sitio son navegación, no acciones). */
-export function ButtonLink({ variant = "primary", arrow = true, icon, className = "", children, ...rest }: Props) {
-  return (
-    <a className={`${base} ${variants[variant]} ${className}`} {...rest}>
+export function ButtonLink({ variant = "primary", arrow = true, icon, className = "", children, href = "#", ...rest }: Props) {
+  const content = (
+    <>
       {icon}
       <span>{children}</span>
       {arrow && (
         <ArrowIcon className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
       )}
+    </>
+  );
+  const cls = `${base} ${variants[variant]} ${className}`;
+  // Rutas internas → navegación instantánea con next/link; externas (WhatsApp, mailto) → <a>
+  if (href.startsWith("/")) {
+    return (
+      <Link href={href} className={cls} {...rest}>
+        {content}
+      </Link>
+    );
+  }
+  return (
+    <a href={href} className={cls} {...rest}>
+      {content}
     </a>
   );
 }

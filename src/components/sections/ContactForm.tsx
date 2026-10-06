@@ -4,7 +4,7 @@ import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import type { Dictionary } from "@/content/types";
 import type { Locale } from "@/i18n/config";
 import { siteConfig, whatsappLink } from "@/config/site";
-import { isInterestId, onSelectArea, UNSURE, type InterestId } from "@/lib/contact-events";
+import { isInterestId, UNSURE, type InterestId } from "@/lib/contact-events";
 import { ArrowIcon, CheckIcon, WhatsAppIcon } from "@/components/ui/icons";
 
 type Props = {
@@ -37,15 +37,12 @@ export function ContactForm({ lang, form, areas, whatsappMessage }: Props) {
     { id: UNSURE, label: form.unsure },
   ];
 
-  // Preselección desde los CTA de la página o desde ?area= en la URL
+  // Preselección desde los CTA del sitio: /contacto?area=web
   useEffect(() => {
     const param = new URLSearchParams(window.location.search).get("area");
-    const timer = isInterestId(param) ? window.setTimeout(() => setInterests([param]), 0) : undefined;
-    const unsubscribe = onSelectArea((id) => setInterests([id]));
-    return () => {
-      unsubscribe();
-      window.clearTimeout(timer);
-    };
+    if (!isInterestId(param)) return;
+    const timer = window.setTimeout(() => setInterests([param]), 0);
+    return () => window.clearTimeout(timer);
   }, []);
 
   const toggle = (id: InterestId) =>

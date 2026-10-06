@@ -1,64 +1,54 @@
 import { notFound } from "next/navigation";
 import { hasLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import { whatsappLink } from "@/config/site";
-import { buildJsonLd } from "@/lib/structured-data";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
-import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat";
+import { route } from "@/lib/routes";
 import { Hero } from "@/components/sections/Hero";
-import { Problem } from "@/components/sections/Problem";
-import { Connected } from "@/components/sections/Connected";
-import { SolutionsSection } from "@/components/sections/SolutionsSection";
-import { Method } from "@/components/sections/Method";
-import { WebDesign } from "@/components/sections/WebDesign";
-import { Automation } from "@/components/sections/Automation";
-import { Sectors } from "@/components/sections/Sectors";
-import { Team } from "@/components/sections/Team";
-import { Projects } from "@/components/sections/Projects";
 import { FinalCta } from "@/components/sections/FinalCta";
-import { Contact } from "@/components/sections/Contact";
+import { SolutionsGrid } from "@/components/solutions/SolutionsGrid";
+import { ExploreCards } from "@/components/home/ExploreCards";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { ButtonLink } from "@/components/ui/ButtonLink";
 
+/**
+ * Inicio: visión general + accesos. El detalle vive en páginas propias
+ * (soluciones, metodología, nosotros, contacto).
+ */
 export default async function HomePage({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
   const dict = await getDictionary(lang);
-  const jsonLd = buildJsonLd(lang, dict);
 
   return (
     <>
-      <a
-        href="#contenido"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-petrol-900 focus:px-5 focus:py-3 focus:text-sand-50"
-      >
-        {dict.common.skip}
-      </a>
-      <Navbar lang={lang} nav={dict.nav} common={dict.common} />
+      <Hero dict={dict} lang={lang} />
 
-      <main id="contenido">
-        {/* Narrativa: ¿Qué hacen? → Entiendo el problema → Todo está conectado → Soluciones →
-            Cómo trabajan → Web e IA como capacidades diferenciales → Para quién → Quiénes son → Contacto */}
-        <Hero dict={dict} />
-        <Problem dict={dict} />
-        <Connected dict={dict} />
-        <SolutionsSection dict={dict} />
-        <Method dict={dict} />
-        <WebDesign dict={dict} />
-        <Automation dict={dict} />
-        <Sectors dict={dict} />
-        <Team dict={dict} />
-        <Projects dict={dict} />
-        <FinalCta dict={dict} />
-        <Contact dict={dict} lang={lang} />
-      </main>
+      <section aria-labelledby="home-soluciones" className="border-t border-line bg-sand-100 py-20 lg:py-28">
+        <div className="container-site">
+          <SectionHeader
+            id="home-soluciones"
+            kicker={dict.home.solutionsKicker}
+            title={dict.home.solutionsTitle}
+            lead={dict.home.solutionsLead}
+            align="split"
+          />
+          <div className="mt-12 lg:mt-16">
+            <SolutionsGrid lang={lang} solutions={dict.solutions} viewLabel={dict.ui.viewSolution} />
+          </div>
+          <div className="mt-10 flex justify-center">
+            <ButtonLink href={route(lang, "solutions")} variant="secondary">
+              {dict.ui.allSolutions}
+            </ButtonLink>
+          </div>
+        </div>
+      </section>
 
-      <Footer dict={dict} />
-      <WhatsAppFloat href={whatsappLink(dict.whatsapp.defaultMessage)} label={dict.whatsapp.floating} />
+      <section aria-label={dict.home.explore.map((c) => c.title).join(" · ")} className="py-20 lg:py-24">
+        <div className="container-site">
+          <ExploreCards lang={lang} dict={dict} />
+        </div>
+      </section>
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
-      />
+      <FinalCta dict={dict} lang={lang} />
     </>
   );
 }

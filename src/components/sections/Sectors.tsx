@@ -7,7 +7,7 @@ export function Sectors({ dict }: { dict: Dictionary }) {
   return (
     <section aria-labelledby="sectores-title" className="bg-white py-24 lg:py-32">
       <div className="container-site">
-        <SectionHeader id="sectores-title" index="07" kicker={sectors.kicker} title={sectors.title} lead={sectors.lead} align="split" />
+        <SectionHeader id="sectores-title" kicker={sectors.kicker} title={sectors.title} lead={sectors.lead} align="split" />
         <ul className="mt-14 grid gap-x-10 sm:grid-cols-2 lg:mt-20 lg:grid-cols-3">
           {sectors.items.map((s, i) => (
             <Reveal

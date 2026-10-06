@@ -15,7 +15,7 @@ export function Projects({ dict }: { dict: Dictionary }) {
   return (
     <section id="proyectos" aria-labelledby="proyectos-title" className="bg-white py-24 lg:py-36">
       <div className="container-site">
-        <SectionHeader id="proyectos-title" index="09" kicker={projects.kicker} title={projects.title} lead={projects.lead} align="split" />
+        <SectionHeader id="proyectos-title" kicker={projects.kicker} title={projects.title} lead={projects.lead} align="split" />
         <ul className="mt-14 grid gap-10 md:grid-cols-2 lg:mt-20">
           {projects.items.map((p, i) => (
             <Reveal as="li" key={p.title} delay={i * 100}>

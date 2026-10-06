@@ -2,7 +2,8 @@ import type { Dictionary } from "@/content/types";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { ButtonLink } from "@/components/ui/ButtonLink";
-import { WebQuoteLink } from "./WebQuoteLink";
+import type { Locale } from "@/i18n/config";
+import { contactRoute, route } from "@/lib/routes";
 
 function Pin({ n, className }: { n: number; className: string }) {
   return (
@@ -85,7 +86,7 @@ function BrowserMockup({ url, annotations }: { url: string; annotations: string[
   );
 }
 
-export function WebDesign({ dict }: { dict: Dictionary }) {
+export function WebDesign({ dict, lang }: { dict: Dictionary; lang: Locale }) {
   const { web } = dict;
 
   return (
@@ -98,7 +99,6 @@ export function WebDesign({ dict }: { dict: Dictionary }) {
       <div className="container-site relative">
         <SectionHeader
           id="diseno-web-title"
-          index="05"
           kicker={web.kicker}
           tone="dark"
           align="split"
@@ -167,8 +167,10 @@ export function WebDesign({ dict }: { dict: Dictionary }) {
             </ul>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row lg:col-span-5 lg:justify-end">
-            <WebQuoteLink label={web.cta} />
-            <ButtonLink href="#soluciones" variant="outline-light" arrow={false}>
+            <ButtonLink href={contactRoute(lang, "web")} variant="light">
+              {web.cta}
+            </ButtonLink>
+            <ButtonLink href={route(lang, "solutions")} variant="outline-light" arrow={false}>
               {web.secondary}
             </ButtonLink>
           </div>

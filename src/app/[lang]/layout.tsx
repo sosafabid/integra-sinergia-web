@@ -4,7 +4,11 @@ import "../globals.css";
 import { fontMono, fontSans, fontSerif } from "@/fonts";
 import { hasLocale, localeMeta, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import { siteConfig } from "@/config/site";
+import { siteConfig, whatsappLink } from "@/config/site";
+import { buildJsonLd } from "@/lib/structured-data";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat";
 
 export const dynamicParams = false;
 
@@ -54,6 +58,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
 export default async function RootLayout({ children, params }: LayoutProps<"/[lang]">) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
+  const dict = await getDictionary(lang);
 
   return (
     <html
@@ -65,7 +70,24 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
         {/* Activa animaciones de aparición solo si hay JS (el contenido nunca queda oculto sin JS) */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
-      <body className="min-h-dvh bg-sand-50 text-ink antialiased">{children}</body>
+      <body className="flex min-h-dvh flex-col bg-sand-50 text-ink antialiased">
+        <a
+          href="#contenido"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-petrol-900 focus:px-5 focus:py-3 focus:text-sand-50"
+        >
+          {dict.common.skip}
+        </a>
+        <Navbar lang={lang} nav={dict.nav} common={dict.common} />
+        <main id="contenido" className="flex-1">
+          {children}
+        </main>
+        <Footer dict={dict} lang={lang} />
+        <WhatsAppFloat href={whatsappLink(dict.whatsapp.defaultMessage)} label={dict.whatsapp.floating} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(buildJsonLd(dict)).replace(/</g, "\\u003c") }}
+        />
+      </body>
     </html>
   );
 }

@@ -35,7 +35,7 @@ function PortraitPlaceholder({ initials, label }: { initials: string; label: str
 function MemberCard({ m, focusLabel, pending }: { m: TeamMember; focusLabel: string; pending: string }) {
   return (
     <article className="grid gap-6 sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] sm:gap-8 lg:grid-cols-1 xl:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
-      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
+      <div className="relative aspect-[4/5] w-full max-w-[17rem] overflow-hidden rounded-2xl sm:max-w-none">
         {m.photo ? (
           <Image src={m.photo} alt={m.photoAlt} fill sizes="(min-width: 1024px) 25vw, (min-width: 640px) 40vw, 100vw" className="object-cover" />
         ) : (
@@ -68,7 +68,7 @@ export function Team({ dict }: { dict: Dictionary }) {
   return (
     <section id="equipo" aria-labelledby="equipo-title" className="py-24 lg:py-36">
       <div className="container-site">
-        <SectionHeader id="equipo-title" index="08" kicker={team.kicker} title={team.title} lead={team.lead} align="split" />
+        <SectionHeader id="equipo-title" kicker={team.kicker} title={team.title} lead={team.lead} align="split" />
         <div className="mt-14 grid gap-16 lg:mt-20 lg:grid-cols-2 lg:gap-12">
           {team.members.map((m, i) => (
             <Reveal key={m.name} delay={i * 120}>

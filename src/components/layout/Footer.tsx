@@ -1,8 +1,11 @@
+import Link from "next/link";
 import type { Dictionary } from "@/content/types";
+import type { Locale } from "@/i18n/config";
+import { route, solutionRoute } from "@/lib/routes";
 import { Logo } from "@/components/ui/Logo";
 import { siteConfig, whatsappLink } from "@/config/site";
 
-export function Footer({ dict }: { dict: Dictionary }) {
+export function Footer({ dict, lang }: { dict: Dictionary; lang: Locale }) {
   const { footer, solutions, contact, whatsapp } = dict;
   const year = new Date().getFullYear();
 
@@ -19,23 +22,23 @@ export function Footer({ dict }: { dict: Dictionary }) {
           <ul className="mt-5 space-y-3 text-[0.95rem]">
             {solutions.areas.map((a) => (
               <li key={a.id}>
-                <a href="#soluciones" className="text-ink-soft transition-colors hover:text-petrol-900">
+                <Link href={solutionRoute(lang, a.id)} className="text-ink-soft transition-colors hover:text-petrol-900">
                   {a.name}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
         </nav>
 
-        <div className="grid gap-10 sm:grid-cols-2 md:col-span-7 lg:col-span-5 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
+        <div className="grid gap-10 sm:grid-cols-2 md:col-span-7 lg:col-span-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
           <nav aria-label={footer.companyTitle}>
             <h2 className="eyebrow text-sand-700">{footer.companyTitle}</h2>
             <ul className="mt-5 space-y-3 text-[0.95rem]">
               {footer.companyLinks.map((l) => (
-                <li key={l.href}>
-                  <a href={l.href} className="text-ink-soft transition-colors hover:text-petrol-900">
+                <li key={l.key}>
+                  <Link href={route(lang, l.key)} className="text-ink-soft transition-colors hover:text-petrol-900">
                     {l.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -54,7 +57,7 @@ export function Footer({ dict }: { dict: Dictionary }) {
                 </a>
               </li>
               <li>
-                <a href={`mailto:${siteConfig.email}`} className="break-words text-ink-soft transition-colors hover:text-petrol-900">
+                <a href={`mailto:${siteConfig.email}`} className="break-all text-[0.88rem] text-ink-soft transition-colors hover:text-petrol-900">
                   {siteConfig.email}
                 </a>
               </li>

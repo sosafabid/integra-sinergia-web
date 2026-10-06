@@ -23,8 +23,63 @@ const en: Dictionary = {
     ],
     ogAlt: "Integra Sinergia — Grow with solid systems.",
   },
+  pages: {
+    solutions: {
+      title: "Integrated business solutions",
+      description: "ISO management systems, sustainability and environmental management, compliance, data, AI automation and web design. Six areas connected in one system.",
+    },
+    method: {
+      title: "The CRECE method",
+      description: "How we work: Understand, Redesign, Execute, Consolidate and Scale. A method to move forward with structure and leave lasting capabilities in your team.",
+    },
+    about: {
+      title: "About us",
+      description: "Integra Sinergia is a Costa Rican boutique firm for integrated business consulting, founded by chemical engineers Fabiola Sosa Duarte and María Celeste Amaya.",
+    },
+    contact: {
+      title: "Contact",
+      description: "Tell us what your organization needs. Reach us by form, WhatsApp or email and we'll help you identify what to solve first.",
+    },
+  },
+  ui: {
+    breadcrumbHome: "Home",
+    viewSolution: "View solution",
+    allSolutions: "All solutions",
+    prev: "Previous",
+    next: "Next",
+    otherSolutions: "Other solutions",
+    talkTitle: "Shall we talk about your case?",
+    talkText: "Tell us about your situation and we'll suggest where to start.",
+  },
+  home: {
+    solutionsKicker: "What we do",
+    solutionsTitle: "Six areas. One system.",
+    solutionsLead: "Choose where to start. Each area solves a specific problem and connects with the others.",
+    explore: [
+      {
+        key: "method",
+        kicker: "How we work",
+        title: "The CRECE method",
+        text: "Understand before proposing, implement alongside your team and leave lasting capabilities.",
+        cta: "Discover the method",
+      },
+      {
+        key: "about",
+        kicker: "Who we are",
+        title: "A boutique firm",
+        text: "Engineering, management and technology, working directly with the people doing the work.",
+        cta: "Meet the team",
+      },
+    ],
+  },
+  about: {
+    kicker: "About",
+    title: "A boutique firm that sees the whole system.",
+    lead: "Integra Sinergia was created to solve, in a connected way, what is usually managed separately: processes, sustainability, compliance, data, technology and digital presence.",
+  },
   common: {
     skip: "Skip to content",
+    homeShort: "Home",
     homeLabel: "Integra Sinergia, go to home",
     language: "Language",
     switchTo: "Ver en español",
@@ -32,11 +87,10 @@ const en: Dictionary = {
   },
   nav: {
     links: [
-      { href: "#soluciones", label: "Solutions" },
-      { href: "#metodologia", label: "Method" },
-      { href: "#diseno-web", label: "Web design" },
-      { href: "#automatizacion", label: "Automation & AI" },
-      { href: "#equipo", label: "Team" },
+      { key: "solutions", label: "Solutions" },
+      { key: "method", label: "Method" },
+      { key: "web", label: "Web design" },
+      { key: "about", label: "About" },
     ],
     cta: "Tell us what you need",
     open: "Open menu",
@@ -112,6 +166,7 @@ const en: Dictionary = {
     areas: [
       {
         id: "gestion",
+        description: "Process mapping and redesign, operating manuals and ISO 9001, 14001, 45001 and 50001 management systems for companies in Costa Rica. Audit and certification readiness.",
         name: "Management, processes & systems",
         label: "Management",
         short: "Clear processes and management systems people actually use.",
@@ -129,6 +184,7 @@ const en: Dictionary = {
       },
       {
         id: "sostenibilidad",
+        description: "Environmental consulting in Costa Rica: environmental and waste management plans, Ecological Blue Flag (PBAE), ISO 14001 and sustainability indicators.",
         name: "Sustainability & environmental management",
         label: "Sustainability",
         short: "Environmental management with real business impact.",
@@ -146,6 +202,7 @@ const en: Dictionary = {
       },
       {
         id: "cumplimiento",
+        description: "Support with procedures, health permits, business licenses, compliance audits and SICOP bid management for companies in Costa Rica.",
         name: "Compliance & administration",
         label: "Compliance",
         short: "Requirements up to date, without last-minute rushes.",
@@ -163,6 +220,7 @@ const en: Dictionary = {
       },
       {
         id: "datos",
+        description: "KPIs, tracking dashboards, root cause analysis and improvement plans to make decisions with reliable data.",
         name: "Data, KPIs & improvement",
         label: "Data",
         short: "Decisions based on what's really happening.",
@@ -180,6 +238,7 @@ const en: Dictionary = {
       },
       {
         id: "automatizacion",
+        description: "Process automation, tool integrations, automated reports and artificial intelligence assistants for companies in Costa Rica.",
         name: "Automation & artificial intelligence",
         label: "Automation",
         short: "Fewer repetitive tasks, more capacity.",
@@ -197,6 +256,7 @@ const en: Dictionary = {
       },
       {
         id: "web",
+        description: "Web design and development in Costa Rica: strategy, UX/UI, custom development, technical SEO and integrations with WhatsApp, CRM and automation.",
         name: "Web design & development",
         label: "Web",
         short: "A digital presence that works for your business.",
@@ -408,9 +468,9 @@ const en: Dictionary = {
     companyTitle: "Integra",
     contactTitle: "Contact",
     companyLinks: [
-      { href: "#metodologia", label: "CRECE method" },
-      { href: "#equipo", label: "Team" },
-      { href: "#contacto", label: "Contact" },
+      { key: "method", label: "CRECE method" },
+      { key: "about", label: "About" },
+      { key: "contact", label: "Contact" },
     ],
     rights: "All rights reserved.",
     builtBy: "Designed and built by Integra Sinergia.",

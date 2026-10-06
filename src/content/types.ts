@@ -1,6 +1,10 @@
 export type AreaId = "gestion" | "sostenibilidad" | "cumplimiento" | "datos" | "automatizacion" | "web";
 
-export type NavLink = { href: string; label: string };
+import type { RouteKey } from "@/lib/routes";
+
+export type NavLink = { key: RouteKey; label: string };
+
+export type PageMeta = { title: string; description: string };
 
 export type SolutionArea = {
   id: AreaId;
@@ -8,6 +12,8 @@ export type SolutionArea = {
   /** Nombre corto para diagramas y chips */
   label: string;
   short: string;
+  /** Descripción para buscadores (≈150 caracteres) */
+  description: string;
   problem: string;
   outcomes: string[];
   why: string;
@@ -44,9 +50,37 @@ export type Dictionary = {
     keywords: string[];
     ogAlt: string;
   };
+  pages: {
+    solutions: PageMeta;
+    method: PageMeta;
+    about: PageMeta;
+    contact: PageMeta;
+  };
+  ui: {
+    breadcrumbHome: string;
+    viewSolution: string;
+    allSolutions: string;
+    prev: string;
+    next: string;
+    otherSolutions: string;
+    talkTitle: string;
+    talkText: string;
+  };
+  home: {
+    solutionsKicker: string;
+    solutionsTitle: string;
+    solutionsLead: string;
+    explore: { key: RouteKey; kicker: string; title: string; text: string; cta: string }[];
+  };
+  about: {
+    kicker: string;
+    title: string;
+    lead: string;
+  };
   common: {
     skip: string;
     homeLabel: string;
+    homeShort: string;
     language: string;
     switchTo: string;
     switchToShort: string;

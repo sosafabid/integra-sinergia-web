@@ -4,8 +4,11 @@ import { ButtonLink } from "@/components/ui/ButtonLink";
 import { WhatsAppIcon } from "@/components/ui/icons";
 import { whatsappLink } from "@/config/site";
 import { SystemDiagram } from "./SystemDiagram";
+import type { Locale } from "@/i18n/config";
+import { contactRoute } from "@/lib/routes";
+import { UNSURE } from "@/lib/contact-events";
 
-export function FinalCta({ dict }: { dict: Dictionary }) {
+export function FinalCta({ dict, lang }: { dict: Dictionary; lang: Locale }) {
   const { finalCta, solutions, hero, whatsapp } = dict;
   const nodes = solutions.areas.map((a) => ({ id: a.id, label: a.label }));
 
@@ -18,7 +21,7 @@ export function FinalCta({ dict }: { dict: Dictionary }) {
           </h2>
           <p className="lead mt-6 max-w-xl text-sand-100/75">{finalCta.lead}</p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-            <ButtonLink href="#contacto" variant="light">
+            <ButtonLink href={contactRoute(lang, UNSURE)} variant="light">
               {finalCta.primary}
             </ButtonLink>
             <ButtonLink

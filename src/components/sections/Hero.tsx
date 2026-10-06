@@ -1,8 +1,10 @@
 import type { Dictionary } from "@/content/types";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { SystemDiagram } from "./SystemDiagram";
+import type { Locale } from "@/i18n/config";
+import { contactRoute, route } from "@/lib/routes";
 
-export function Hero({ dict }: { dict: Dictionary }) {
+export function Hero({ dict, lang }: { dict: Dictionary; lang: Locale }) {
   const { hero, solutions } = dict;
   const nodes = solutions.areas.map((a) => ({ id: a.id, label: a.label }));
 
@@ -24,8 +26,8 @@ export function Hero({ dict }: { dict: Dictionary }) {
           <p className="lead mt-7 max-w-[38rem] text-ink-soft">{hero.lead}</p>
 
           <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <ButtonLink href="#contacto">{hero.ctaPrimary}</ButtonLink>
-            <ButtonLink href="#soluciones" variant="secondary" arrow={false}>
+            <ButtonLink href={contactRoute(lang)}>{hero.ctaPrimary}</ButtonLink>
+            <ButtonLink href={route(lang, "solutions")} variant="secondary" arrow={false}>
               {hero.ctaSecondary}
             </ButtonLink>
           </div>

@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { Reveal } from "./Reveal";
 
 type Props = {
-  index: string;
+  index?: string;
   kicker: string;
   title: ReactNode;
   lead?: string;
@@ -27,8 +27,12 @@ export function SectionHeader({ index, kicker, title, lead, tone = "light", alig
     >
       <Reveal className={align === "split" ? "lg:col-span-7" : ""}>
         <p className={`eyebrow flex items-center gap-3 ${dark ? "text-sand-400" : "text-sand-700"}`}>
-          <span className="tabular-nums">{index}</span>
-          <span aria-hidden="true" className={`h-px w-8 ${dark ? "bg-sand-400/50" : "bg-sand-500/60"}`} />
+          {index && (
+            <>
+              <span className="tabular-nums">{index}</span>
+              <span aria-hidden="true" className={`h-px w-8 ${dark ? "bg-sand-400/50" : "bg-sand-500/60"}`} />
+            </>
+          )}
           <span>{kicker}</span>
         </p>
         <h2 id={id} className={`display-2 mt-5 ${dark ? "text-sand-50" : "text-petrol-900"}`}>

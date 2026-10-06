@@ -1,24 +1,28 @@
 import type { Dictionary } from "@/content/types";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal } from "@/components/ui/Reveal";
-import { UnsureLink } from "./UnsureLink";
+import { ButtonLink } from "@/components/ui/ButtonLink";
+import type { Locale } from "@/i18n/config";
+import { contactRoute } from "@/lib/routes";
+import { UNSURE } from "@/lib/contact-events";
 
-export function Method({ dict }: { dict: Dictionary }) {
+export function Method({ dict, lang, withHeader = true }: { dict: Dictionary; lang: Locale; withHeader?: boolean }) {
   const { method } = dict;
 
   return (
-    <section id="metodologia" aria-labelledby="metodologia-title" className="bg-white py-24 lg:py-36">
+    <section id="metodologia" aria-labelledby={withHeader ? "metodologia-title" : undefined} aria-label={withHeader ? undefined : method.kicker} className="bg-white py-20 lg:py-28">
       <div className="container-site">
-        <SectionHeader
-          id="metodologia-title"
-          index="04"
-          kicker={method.kicker}
-          title={method.title}
-          lead={method.lead}
-          align="split"
-        />
+        {withHeader && (
+          <SectionHeader
+            id="metodologia-title"
+            kicker={method.kicker}
+            title={method.title}
+            lead={method.lead}
+            align="split"
+          />
+        )}
 
-        <ol className="relative mt-16 grid gap-0 lg:mt-24 lg:grid-cols-5 lg:gap-6">
+        <ol className={`relative grid gap-0 lg:grid-cols-5 lg:gap-6 ${withHeader ? "mt-16 lg:mt-24" : ""}`}>
           {/* Línea conectora: vertical en móvil, horizontal en desktop */}
           <span aria-hidden="true" className="absolute bottom-6 left-[1.4rem] top-6 w-px bg-line-strong lg:hidden" />
           <span aria-hidden="true" className="absolute left-0 right-0 top-[1.4rem] hidden h-px bg-line-strong lg:block" />
@@ -41,7 +45,7 @@ export function Method({ dict }: { dict: Dictionary }) {
         </ol>
 
         <Reveal className="mt-16 flex lg:mt-20">
-          <UnsureLink label={method.cta} variant="primary" />
+          <ButtonLink href={contactRoute(lang, UNSURE)}>{method.cta}</ButtonLink>
         </Reveal>
       </div>
     </section>

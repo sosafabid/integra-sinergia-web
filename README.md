@@ -75,22 +75,43 @@ npm run start   # sirve el build localmente
 | Textos en inglés | `src/content/en.ts` |
 | Email, teléfonos, WhatsApp, dominio | `src/config/site.ts` |
 | Colores, tipografía, espaciados | `src/app/globals.css` (bloque `@theme`) |
-| Orden de las secciones | `src/app/[lang]/page.tsx` |
+| Contenido del inicio | `src/app/[lang]/page.tsx` |
+| Páginas internas | `src/app/[lang]/soluciones`, `metodologia`, `nosotros`, `contacto` |
+| URLs de las soluciones | `src/lib/routes.ts` |
 | Logo | `public/brand/` |
 | Fotos del equipo | `public/team/` + campo `photo` en `es.ts` / `en.ts` |
 | Proyectos / casos | `projects.items` en `es.ts` / `en.ts` (la sección aparece sola cuando hay al menos uno) |
 
-## 7. Estructura
+## 7. Mapa del sitio
+
+```
+/es                     Inicio: visión general + accesos a las 6 soluciones
+/es/soluciones          Todas las soluciones + enfoque integrado
+/es/soluciones/gestion-procesos-sistemas
+/es/soluciones/sostenibilidad-gestion-ambiental
+/es/soluciones/cumplimiento-gestion-administrativa
+/es/soluciones/datos-indicadores-mejora
+/es/soluciones/automatizacion-inteligencia-artificial   (+ bloque ampliado de IA)
+/es/soluciones/diseno-desarrollo-web                    (+ bloque ampliado de diseño web)
+/es/metodologia         Metodología CRECE
+/es/nosotros            Equipo, por qué existimos, para quién (y proyectos cuando existan)
+/es/contacto            Formulario + WhatsApp + correo (acepta ?area=web para preseleccionar)
+```
+Lo mismo en inglés bajo `/en/...`.
+
+## 8. Estructura de código
 
 ```
 src/
   app/
-    [lang]/            → páginas por idioma (/es, /en), layout, 404, imagen Open Graph
+    [lang]/            → layout (menú + footer), inicio, páginas internas, 404, imagen Open Graph
     sitemap.ts, robots.ts, icon.png, apple-icon.png, favicon.ico
     globals.css        → sistema visual
   components/
     layout/            → Navbar, Footer, WhatsApp flotante
-    sections/          → cada sección de la home
+    sections/          → bloques de contenido reutilizados por las páginas
+    solutions/         → tarjetas de soluciones y detalle de cada solución
+    home/              → accesos del inicio
     ui/                → botones, encabezados, íconos, logo, animación de aparición
   content/             → textos ES/EN (tipados con types.ts)
   config/site.ts       → datos de contacto y variables
@@ -100,7 +121,7 @@ src/
   proxy.ts             → redirige "/" al idioma del visitante
 ```
 
-## 8. Pendientes antes del lanzamiento
+## 9. Pendientes antes del lanzamiento
 
 - [ ] **Logo en SVG** (los PNG actuales se recortaron de la tarjeta oficial; reemplazar en `public/brand/`).
 - [ ] **Fotos profesionales** de Fabiola y María Celeste (`public/team/`, formato 4:5, ~1200×1500 px).

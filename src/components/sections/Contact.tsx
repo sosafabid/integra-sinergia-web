@@ -6,17 +6,17 @@ import { MailIcon, PhoneIcon, PinIcon, WhatsAppIcon } from "@/components/ui/icon
 import { siteConfig, whatsappLink } from "@/config/site";
 import { ContactForm } from "./ContactForm";
 
-export function Contact({ dict, lang }: { dict: Dictionary; lang: Locale }) {
+export function Contact({ dict, lang, withHeader = true }: { dict: Dictionary; lang: Locale; withHeader?: boolean }) {
   const { contact, solutions, whatsapp } = dict;
   const row = "flex items-start gap-4 py-4 border-b border-line";
   const icon = "mt-0.5 size-5 shrink-0 text-green-700";
 
   return (
-    <section id="contacto" aria-labelledby="contacto-title" className="py-24 lg:py-36">
+    <section id="contacto" aria-labelledby={withHeader ? "contacto-title" : undefined} aria-label={withHeader ? undefined : contact.kicker} className="py-20 lg:py-28">
       <div className="container-site grid gap-14 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-5">
-          <SectionHeader id="contacto-title" index="09" kicker={contact.kicker} title={contact.title} lead={contact.lead} />
-          <Reveal delay={150} className="mt-12">
+          {withHeader && <SectionHeader id="contacto-title" kicker={contact.kicker} title={contact.title} lead={contact.lead} />}
+          <Reveal delay={150} className={withHeader ? "mt-12" : ""}>
             <h3 className="eyebrow text-sand-700">{contact.direct.title}</h3>
             <ul className="mt-4 border-t border-line">
               <li>

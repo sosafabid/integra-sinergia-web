@@ -101,7 +101,7 @@ export function Connected({ dict }: { dict: Dictionary }) {
       <div className="container-site">
         <SectionHeader
           id="conectado-title"
-          index="02"
+         
           kicker={c.kicker}
           align="split"
           title={

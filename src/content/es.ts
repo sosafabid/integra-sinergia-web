@@ -29,8 +29,63 @@ const es: Dictionary = {
     ],
     ogAlt: "Integra Sinergia — Crece con sistemas sólidos.",
   },
+  pages: {
+    solutions: {
+      title: "Soluciones empresariales integrales",
+      description: "Gestión y sistemas ISO, sostenibilidad y gestión ambiental, cumplimiento, datos, automatización con IA y diseño web. Seis áreas conectadas en un mismo sistema.",
+    },
+    method: {
+      title: "Metodología CRECE",
+      description: "Cómo trabajamos: Comprender, Rediseñar, Ejecutar, Consolidar y Escalar. Un método para avanzar con orden y dejar capacidades instaladas en tu equipo.",
+    },
+    about: {
+      title: "Nosotros",
+      description: "Integra Sinergia es una firma boutique costarricense de consultoría empresarial integral, fundada por las ingenieras químicas Fabiola Sosa Duarte y María Celeste Amaya.",
+    },
+    contact: {
+      title: "Contacto",
+      description: "Cuéntanos qué necesita tu organización. Escríbenos por formulario, WhatsApp o correo y te ayudamos a identificar qué resolver primero.",
+    },
+  },
+  ui: {
+    breadcrumbHome: "Inicio",
+    viewSolution: "Ver solución",
+    allSolutions: "Todas las soluciones",
+    prev: "Anterior",
+    next: "Siguiente",
+    otherSolutions: "Otras soluciones",
+    talkTitle: "¿Hablamos de tu caso?",
+    talkText: "Cuéntanos tu situación y te proponemos por dónde empezar.",
+  },
+  home: {
+    solutionsKicker: "Qué hacemos",
+    solutionsTitle: "Seis áreas. Un mismo sistema.",
+    solutionsLead: "Elige por dónde empezar. Cada área resuelve un problema concreto y se conecta con las demás.",
+    explore: [
+      {
+        key: "method",
+        kicker: "Cómo trabajamos",
+        title: "Metodología CRECE",
+        text: "Entender antes de proponer, implementar junto a tu equipo y dejar capacidades instaladas.",
+        cta: "Conocer el método",
+      },
+      {
+        key: "about",
+        kicker: "Quiénes somos",
+        title: "Una firma boutique",
+        text: "Ingeniería, gestión y tecnología, con trato directo con quienes hacen el trabajo.",
+        cta: "Conocer al equipo",
+      },
+    ],
+  },
+  about: {
+    kicker: "Nosotros",
+    title: "Una firma boutique que ve el sistema completo.",
+    lead: "Integra Sinergia nace para resolver de forma conectada lo que normalmente se gestiona por separado: procesos, sostenibilidad, cumplimiento, datos, tecnología y presencia digital.",
+  },
   common: {
     skip: "Saltar al contenido",
+    homeShort: "Inicio",
     homeLabel: "Integra Sinergia, ir al inicio",
     language: "Idioma",
     switchTo: "View in English",
@@ -38,11 +93,10 @@ const es: Dictionary = {
   },
   nav: {
     links: [
-      { href: "#soluciones", label: "Soluciones" },
-      { href: "#metodologia", label: "Metodología" },
-      { href: "#diseno-web", label: "Diseño web" },
-      { href: "#automatizacion", label: "Automatización e IA" },
-      { href: "#equipo", label: "Equipo" },
+      { key: "solutions", label: "Soluciones" },
+      { key: "method", label: "Metodología" },
+      { key: "web", label: "Diseño web" },
+      { key: "about", label: "Nosotros" },
     ],
     cta: "Cuéntanos qué necesitas",
     open: "Abrir menú",
@@ -118,6 +172,7 @@ const es: Dictionary = {
     areas: [
       {
         id: "gestion",
+        description: "Mapeo y rediseño de procesos, manuales y sistemas de gestión ISO 9001, 14001, 45001 y 50001 para empresas en Costa Rica. Preparación para auditorías y certificación.",
         name: "Gestión, procesos y sistemas",
         label: "Gestión",
         short: "Procesos claros y sistemas de gestión que se usan.",
@@ -135,6 +190,7 @@ const es: Dictionary = {
       },
       {
         id: "sostenibilidad",
+        description: "Consultoría ambiental en Costa Rica: planes de gestión ambiental y de residuos, Bandera Azul Ecológica (PBAE), ISO 14001 e indicadores de sostenibilidad.",
         name: "Sostenibilidad y gestión ambiental",
         label: "Sostenibilidad",
         short: "Gestión ambiental con impacto real en el negocio.",
@@ -152,6 +208,7 @@ const es: Dictionary = {
       },
       {
         id: "cumplimiento",
+        description: "Acompañamiento en trámites, permisos sanitarios, patentes, auditorías de cumplimiento y gestión de ofertas en SICOP para empresas en Costa Rica.",
         name: "Cumplimiento y gestión administrativa",
         label: "Cumplimiento",
         short: "Requisitos al día, sin carreras de último minuto.",
@@ -169,6 +226,7 @@ const es: Dictionary = {
       },
       {
         id: "datos",
+        description: "Indicadores (KPI), tableros de seguimiento, análisis de causa raíz y planes de mejora para decidir con datos confiables.",
         name: "Datos, indicadores y mejora",
         label: "Datos",
         short: "Decisiones basadas en lo que realmente pasa.",
@@ -186,6 +244,7 @@ const es: Dictionary = {
       },
       {
         id: "automatizacion",
+        description: "Automatización de procesos, integraciones entre herramientas, reportes automáticos y asistentes de inteligencia artificial para empresas en Costa Rica.",
         name: "Automatización e inteligencia artificial",
         label: "Automatización",
         short: "Menos tareas repetitivas, más capacidad.",
@@ -203,6 +262,7 @@ const es: Dictionary = {
       },
       {
         id: "web",
+        description: "Diseño y desarrollo web en Costa Rica: estrategia, UX/UI, desarrollo a medida, SEO técnico e integraciones con WhatsApp, CRM y automatizaciones.",
         name: "Diseño y desarrollo web",
         label: "Web",
         short: "Una presencia digital que trabaja para tu negocio.",
@@ -430,9 +490,9 @@ const es: Dictionary = {
     companyTitle: "Integra",
     contactTitle: "Contacto",
     companyLinks: [
-      { href: "#metodologia", label: "Metodología CRECE" },
-      { href: "#equipo", label: "Equipo" },
-      { href: "#contacto", label: "Contacto" },
+      { key: "method", label: "Metodología CRECE" },
+      { key: "about", label: "Nosotros" },
+      { key: "contact", label: "Contacto" },
     ],
     rights: "Todos los derechos reservados.",
     builtBy: "Diseñado y desarrollado por Integra Sinergia.",
