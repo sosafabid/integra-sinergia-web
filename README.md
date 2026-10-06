@@ -77,7 +77,9 @@ npm run start   # sirve el build localmente
 | Contenido de la home | `src/app/[lang]/page.tsx` |
 | Soluciones (textos de cada página) | `solutions` en `es.ts` / `en.ts` |
 | Proyectos | `projects.items` en `es.ts` / `en.ts` + imagen en `public/showcase/` |
-| Fotos del equipo | `public/team/` + campo `photo` en `team.members` |
+| Fotografías reales | `public/photos/` y `public/team/` con los nombres de `src/content/photos.ts` (se activan solas) |
+| Pies de foto | `photos` en `es.ts` / `en.ts` |
+| Capturas de proyectos | `public/projects/` con el nombre indicado en `projects.items[].image` |
 | URLs y traducción de rutas al inglés | `src/lib/routes.ts` |
 | Redirecciones de URLs antiguas | `next.config.ts` |
 
@@ -110,15 +112,34 @@ redirigen de forma permanente a las nuevas.
 - **Isotipo:** `src/components/ui/Structure.tsx` es una geometría inspirada en el isotipo (no es el logo). Solo aparece en el hero.
 - **Capturas del sitio** (`public/showcase/`): si cambia el hero, conviene volver a tomarlas.
 
-## 9. Pendientes antes del lanzamiento
+## 9. Fotografías y capturas (se activan solas)
 
-- [ ] **Logo en SVG** (los PNG actuales se recortaron de la tarjeta oficial; reemplazar en `public/brand/`).
-- [ ] **Fotos profesionales** de Fabiola y María Celeste (`public/team/`, formato 4:5, ~1200×1500 px).
-- [ ] Validar **biografías** del equipo.
-- [ ] Validar los textos de cada etapa del **método** (Comprender, Estandarizar, Mejorar, Escalar) y las promesas de cada solución.
-- [ ] Confirmar **WhatsApp comercial** y **correo** definitivo (idealmente un correo con el dominio).
+Coloca cada archivo con el nombre exacto. Mientras no exista, el sitio muestra un espacio neutro.
+
+| Archivo | Dónde aparece |
+|---|---|
+| `public/photos/equipo.jpg` | Fabiola y María Celeste juntas (horizontal). Inicio y Nosotros |
+| `public/team/fabiola.jpg` | Retrato vertical 4:5. Nosotros |
+| `public/team/maria-celeste.jpg` | Retrato vertical 4:5. Nosotros |
+| `public/photos/experiencia-brasil.jpg` | Conferencia regional en Brasil. Proyectos y Nosotros |
+| `public/photos/experiencia-panel.jpg` | Panel o foro. Proyectos y Nosotros |
+| `public/photos/experiencia-foro.jpg` | Foro técnico / normalización. Nosotros |
+| `public/photos/experiencia-sostenibilidad.jpg` | Evento de sostenibilidad. Nosotros y Soluciones › Sostenibilidad |
+| `public/photos/experiencia-reunion.jpg` | Reunión de trabajo. Soluciones › Gestión y proyecto Gestión empresarial |
+| `public/projects/azul-clarito.jpg` | Captura del sitio (1440×900). Inicio y Proyectos |
+| `public/projects/kio.jpg` | Captura del sistema (16:10). Proyectos |
+| `public/projects/plataforma-diabetes.jpg` | Captura de la plataforma (16:10). Proyectos |
+
+JPG, lado mayor ~2000 px, menos de 500 KB. Después de agregar fotos: `npm run build` y `git push`.
+
+## 10. Pendientes antes del lanzamiento
+
+- [ ] Fotografías y capturas de la tabla anterior.
+- [ ] Pies de foto reales (evento y año) en `photos` de `es.ts` / `en.ts`.
+- [ ] **Logo en SVG** (reemplazar en `public/brand/`).
+- [ ] Validar **biografías**, promesas de cada solución y textos del método.
+- [ ] Confirmar **WhatsApp comercial** y **correo** definitivo.
 - [ ] Crear el formulario en **Formspree** y configurar `NEXT_PUBLIC_FORMSPREE_ID`.
-- [ ] Agregar **proyectos reales** autorizados (nombre, categoría, una frase y captura).
 - [ ] Conectar dominio en Vercel y registrar el sitio en **Google Search Console** (enviar `sitemap.xml`).
 
 ## Reglas del proyecto

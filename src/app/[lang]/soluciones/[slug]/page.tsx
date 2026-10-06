@@ -9,7 +9,9 @@ import { PageHero } from "@/components/ui/PageHero";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { WhatsAppIcon } from "@/components/ui/icons";
 import { Devices } from "@/components/shared/Devices";
-import { ProjectsGrid } from "@/components/shared/ProjectsGrid";
+import { ProjectVisual } from "@/components/shared/ProjectVisual";
+import { Photo } from "@/components/ui/Photo";
+import { Reveal } from "@/components/ui/Reveal";
 import { CtaBand } from "@/components/shared/CtaBand";
 import { SectionHead } from "@/components/ui/SectionHead";
 import { ProcessStepper } from "@/components/solutions/ProcessStepper";
@@ -62,10 +64,10 @@ export default async function SolutionPage({ params }: PageProps<"/[lang]/soluci
 
       {/* Diseño web: la demostración va primero */}
       {isWeb && (
-        <section aria-label={dict.home.showcase.kicker} className="on-dark bg-petrol py-20 text-white lg:py-28">
+        <section aria-label={solution.fullName} className="on-dark bg-petrol py-20 text-white lg:py-28">
           <div className="wrap">
             <div className="mx-auto max-w-5xl">
-              <Devices alt={dict.home.showcase.mockupAlt} mobileAlt={dict.home.showcase.mobileAlt} priority />
+              <Devices alt={dict.web.mockupAlt} mobileAlt={dict.web.mobileAlt} priority />
             </div>
             <div className="mt-20 border-t border-white/15 pt-14 lg:mt-24">
               <ProcessStepper steps={dict.web.process} title={dict.web.processTitle} />
@@ -75,14 +77,38 @@ export default async function SolutionPage({ params }: PageProps<"/[lang]/soluci
       )}
 
       <ProblemSolution lang={lang} dict={dict} solution={solution} />
+
+      {/* Fotografía real cuando la solución tiene una asociada */}
+      {solution.photo && (
+        <div className="wrap pb-4">
+          <Reveal variant="mask">
+            <Photo
+              photo={solution.photo}
+              text={dict.photos[solution.photo]}
+              sizes="(min-width: 1280px) 1180px, 100vw"
+              className="aspect-[16/9] rounded-xl sm:aspect-[21/9]"
+              showCaption
+            />
+          </Reveal>
+        </div>
+      )}
       <Services lang={lang} dict={dict} solution={solution} />
 
       {isWeb && webProjects.length > 0 && (
         <section aria-labelledby="web-proyectos" className="border-t border-line py-20 lg:py-28">
           <div className="wrap">
             <SectionHead id="web-proyectos" title={dict.web.projectsTitle} />
-            <div className="mt-10">
-              <ProjectsGrid items={webProjects} />
+            <div className="mt-10 grid gap-x-8 gap-y-12 md:grid-cols-2">
+              {webProjects.map((p) => (
+                <article key={p.slug} className="group">
+                  <Reveal variant="mask" className="overflow-hidden rounded-xl ring-1 ring-line">
+                    <ProjectVisual project={p} dict={dict} sizes="(min-width: 768px) 50vw, 100vw" />
+                  </Reveal>
+                  <p className="t-small mt-5 text-ink-3">{p.category}</p>
+                  <h3 className="t-h3 mt-1 text-ink">{p.title}</h3>
+                  <p className="t-small mt-2 max-w-[44ch] text-ink-2">{p.summary}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>

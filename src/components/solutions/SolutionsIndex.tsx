@@ -17,7 +17,7 @@ export function SolutionsIndex({ lang, solutions }: { lang: Locale; solutions: S
           >
             <span className="md:col-span-4">
               <span className="t-h2 block text-ink transition-colors group-hover:text-petrol">{s.name}</span>
-              <span className="t-small mt-1 block text-ink-3">{s.line}</span>
+              <span className="t-small mt-1 block text-ink-3">{s.summary}</span>
             </span>
             <span className="t-lead text-ink-2 md:col-span-6">{s.promise}</span>
             <span className="hidden justify-end md:col-span-2 md:flex">

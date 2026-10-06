@@ -2,7 +2,7 @@ import type { Dictionary } from "./types";
 
 /**
  * Contenido en español.
- * Una página = una idea. Si una idea cabe en 10 palabras, no usar 40.
+ * La home presenta; la profundidad vive en las páginas internas.
  * Nada de clientes, cifras, testimonios ni resultados inventados.
  */
 const es: Dictionary = {
@@ -10,7 +10,7 @@ const es: Dictionary = {
     title: "Integra Sinergia | Consultoría empresarial en Costa Rica",
     titleTemplate: "%s | Integra Sinergia",
     description:
-      "Integramos gestión, sostenibilidad y tecnología para que las empresas funcionen mejor. Sistemas ISO, gestión ambiental, cumplimiento, automatización y diseño web en Costa Rica.",
+      "Integra Sinergia conecta gestión, sostenibilidad, tecnología y diseño para ayudar a organizaciones a crecer con sistemas sólidos. Costa Rica.",
     keywords: [
       "consultoría empresarial Costa Rica",
       "consultoría ambiental",
@@ -31,11 +31,11 @@ const es: Dictionary = {
     solutions: {
       title: "Soluciones",
       description:
-        "Gestión, sostenibilidad, cumplimiento, tecnología y diseño web. Integramos disciplinas según el problema que tu empresa necesita resolver.",
+        "Gestión, sostenibilidad, cumplimiento, tecnología e IA y diseño web. Integramos disciplinas según el problema que tu organización necesita resolver.",
     },
     projects: {
       title: "Proyectos",
-      description: "Proyectos de Integra Sinergia: diseño web, gestión y tecnología aplicada.",
+      description: "Proyectos de Integra Sinergia: diseño web, transformación digital, productos digitales y gestión empresarial.",
     },
     about: {
       title: "Nosotros",
@@ -43,8 +43,8 @@ const es: Dictionary = {
         "Integra Sinergia es una firma costarricense fundada por las ingenieras químicas Fabiola Sosa Duarte y María Celeste Amaya.",
     },
     contact: {
-      title: "Contacto",
-      description: "Cuéntanos qué necesita tu empresa. Te respondemos por correo o WhatsApp.",
+      title: "Hablemos",
+      description: "Cuéntanos qué necesita tu organización. Te respondemos por correo o WhatsApp.",
     },
   },
   common: {
@@ -55,9 +55,11 @@ const es: Dictionary = {
     switchToShort: "EN",
     menuOpen: "Abrir menú",
     menuClose: "Cerrar menú",
+    allSolutions: "Todas las soluciones",
   },
   nav: {
     links: [
+      { key: "home", label: "Inicio" },
       { key: "solutions", label: "Soluciones" },
       { key: "projects", label: "Proyectos" },
       { key: "about", label: "Nosotros" },
@@ -66,54 +68,63 @@ const es: Dictionary = {
   },
   ctaPrimary: "Cuéntanos qué necesitas",
   ui: {
-    viewAll: "Ver todo",
     related: "También te puede interesar",
     backToSolutions: "Soluciones",
     problem: "El problema",
     solution: "Nuestra solución",
     services: "Qué podemos hacer",
     howWeWork: "Cómo trabajamos",
+    learnMore: "Conocer solución",
+    visitSite: "Visitar sitio",
+    viewProject: "Ver proyecto",
+    screenshotSoon: "Capturas próximamente",
+  },
+  // TODO (Fabi): completar los pies de foto con el nombre real del evento y el año.
+  photos: {
+    team: { alt: "Fabiola Sosa Duarte y María Celeste Amaya, fundadoras de Integra Sinergia" },
+    fabiola: { alt: "Ing. Fabiola Sosa Duarte" },
+    mariaCeleste: { alt: "Ing. María Celeste Amaya" },
+    brasil: { alt: "Fabiola Sosa Duarte en una conferencia regional en Brasil", caption: "Conferencia regional · Brasil" },
+    panel: { alt: "Fabiola Sosa Duarte participando en un panel técnico", caption: "Panel técnico" },
+    sostenibilidad: { alt: "Participación en un evento técnico sobre sostenibilidad", caption: "Evento técnico de sostenibilidad" },
+    foro: { alt: "Participación en un foro técnico", caption: "Foro técnico" },
+    reunion: { alt: "Reunión de trabajo", caption: "Reunión de trabajo" },
   },
   home: {
     hero: {
       titleA: "Tu empresa es un sistema.",
       titleB: "Haz que funcione mejor.",
-      lead: "Integramos gestión, sostenibilidad y tecnología para construir soluciones que ayudan a las empresas a crecer.",
-      secondary: "Explorar soluciones",
+      lead: "Integra Sinergia conecta gestión, sostenibilidad, tecnología y diseño para ayudar a organizaciones a crecer con sistemas sólidos.",
+      primary: "Conocer soluciones",
+      secondary: "Hablemos",
     },
     idea: {
-      kicker: "Todo está conectado",
-      title: "Cuando las piezas trabajan juntas, el negocio funciona mejor.",
-      pieces: ["Personas", "Procesos", "Información", "Tecnología", "Sostenibilidad"],
-      text: "Por eso no resolvemos problemas aislados. Entendemos el sistema completo y trabajamos lo que realmente lo mueve.",
+      title: "Todo está conectado.",
+      text: "Una organización no funciona por áreas aisladas. Gestión, procesos, sostenibilidad, tecnología y presencia digital tienen que trabajar juntos.",
     },
     solutions: {
       kicker: "Soluciones",
-      title: "Lo que hacemos",
-      cta: "Explorar soluciones",
+      title: "Qué hacemos",
     },
-    showcase: {
-      kicker: "Diseño y tecnología",
-      title: "Tu presencia digital también es parte de tu negocio.",
-      lead: "Diseñamos y desarrollamos sitios web que representan tu marca, generan confianza y convierten visitas en oportunidades.",
-      cta: "Ver diseño web",
-      mockupAlt: "Sitio web de Integra Sinergia en una computadora",
-      mobileAlt: "Sitio web de Integra Sinergia en un teléfono",
+    featured: {
+      kicker: "Proyecto destacado",
+      projectSlug: "azul-clarito",
     },
-    projects: {
-      kicker: "Proyectos",
-      title: "Trabajo reciente",
-      cta: "Ver proyectos",
-    },
-    team: {
-      kicker: "Equipo",
-      title: "Personas reales detrás de soluciones reales.",
+    people: {
+      kicker: "Quiénes están detrás",
+      title: "Personas detrás de los sistemas.",
+      text: "Integra Sinergia nace de una visión multidisciplinaria: combinar conocimiento técnico, gestión y tecnología para resolver problemas reales.",
       cta: "Conocer al equipo",
+    },
+    final: {
+      title: "¿Tienes un reto y no sabes por dónde empezar?",
+      titleB: "Hablemos.",
+      cta: "Cuéntanos qué necesitas",
     },
   },
   solutionsPage: {
-    title: "Soluciones para hacer que tu empresa funcione mejor.",
-    lead: "No todas las empresas necesitan lo mismo. Integramos distintas disciplinas según el problema que quieres resolver.",
+    title: "Soluciones para hacer que tu organización funcione mejor.",
+    lead: "No todas las organizaciones necesitan lo mismo. Integramos distintas disciplinas según el problema que quieres resolver.",
     unsure: {
       title: "¿No sabes por dónde empezar?",
       text: "Es lo más común. Cuéntanos la situación y te orientamos.",
@@ -124,7 +135,7 @@ const es: Dictionary = {
       id: "gestion",
       name: "Gestión",
       fullName: "Gestión, procesos y sistemas",
-      line: "Procesos, sistemas y mejora.",
+      summary: "Ordenamos procesos y sistemas para que la operación sea más clara y consistente.",
       promise: "Ordena la forma en que trabaja tu empresa.",
       lead: "Procesos claros, responsables definidos y sistemas de gestión que el equipo realmente usa.",
       description:
@@ -139,12 +150,13 @@ const es: Dictionary = {
       ],
       cta: "Ordenar mis procesos",
       related: ["cumplimiento", "tecnologia"],
+      photo: "reunion",
     },
     {
       id: "sostenibilidad",
       name: "Sostenibilidad",
       fullName: "Sostenibilidad y gestión ambiental",
-      line: "Gestión ambiental y desempeño.",
+      summary: "Convertimos compromisos ambientales en acciones y sistemas de gestión.",
       promise: "Gestión ambiental que también mejora el negocio.",
       lead: "Cumplir lo que se exige y aprovechar lo ambiental para operar con más eficiencia.",
       description:
@@ -159,12 +171,13 @@ const es: Dictionary = {
       ],
       cta: "Fortalecer mi gestión ambiental",
       related: ["gestion", "cumplimiento"],
+      photo: "sostenibilidad",
     },
     {
       id: "cumplimiento",
       name: "Cumplimiento",
       fullName: "Cumplimiento y gestión administrativa",
-      line: "Requisitos, trámites y preparación.",
+      summary: "Ayudamos a las organizaciones a entender y gestionar sus obligaciones.",
       promise: "Requisitos al día, sin carreras de último minuto.",
       lead: "Permisos, trámites y procesos de contratación bajo control, con responsables y fechas claras.",
       description:
@@ -182,9 +195,9 @@ const es: Dictionary = {
     },
     {
       id: "tecnologia",
-      name: "Tecnología",
+      name: "Tecnología e IA",
       fullName: "Automatización e inteligencia artificial",
-      line: "Automatización e inteligencia artificial.",
+      summary: "Usamos datos, automatización e IA para simplificar procesos y mejorar decisiones.",
       promise: "Menos trabajo repetitivo. Más tiempo para crecer.",
       lead: "Automatización, datos e inteligencia artificial aplicados a procesos reales.",
       description:
@@ -202,9 +215,9 @@ const es: Dictionary = {
     },
     {
       id: "web",
-      name: "Diseño digital",
+      name: "Diseño web",
       fullName: "Diseño y desarrollo web",
-      line: "Web y presencia digital.",
+      summary: "Creamos experiencias digitales que representan y fortalecen el negocio.",
       promise: "Tu presencia digital también es parte de tu negocio.",
       lead: "Diseñamos y desarrollamos sitios web que representan tu marca, generan confianza y convierten visitas en oportunidades.",
       description:
@@ -232,7 +245,9 @@ const es: Dictionary = {
       { name: "SEO", text: "Base técnica para aparecer cuando te buscan." },
       { name: "Conversión", text: "Cada sección guía hacia el contacto." },
     ],
-    projectsTitle: "Sitios que hemos diseñado",
+    projectsTitle: "Proyectos digitales",
+    mockupAlt: "Sitio web de Integra Sinergia en una computadora",
+    mobileAlt: "Sitio web de Integra Sinergia en un teléfono",
   },
   method: {
     title: "Cómo trabajamos",
@@ -246,68 +261,116 @@ const es: Dictionary = {
   },
   projects: {
     title: "Proyectos",
-    lead: "Una selección de nuestro trabajo.",
-    // Agregar solo proyectos reales y autorizados por el cliente.
+    lead: "Ideas que se convierten en sistemas, herramientas y experiencias.",
+    // Solo proyectos reales. Capturas en /public/projects/ con el nombre indicado en `image`.
     items: [
       {
+        slug: "azul-clarito",
+        title: "Azul Clarito",
+        category: "Diseño web · Experiencia digital",
+        summary: "Diseño y desarrollo de una experiencia digital que conecta identidad, contenido y presencia web.",
+        image: "/projects/azul-clarito.jpg",
+        imageAlt: "Sitio web de Azul Clarito",
+        href: "https://azulclaritocr.com/",
+        solutions: ["web"],
+      },
+      {
+        slug: "kio",
+        title: "KIO — Digitalización de sistema de producción",
+        category: "Transformación digital · Gestión de procesos",
+        summary: "Digitalización de un sistema de producción para facilitar el registro, seguimiento y organización de la información operativa.",
+        image: "/projects/kio.jpg",
+        imageAlt: "Sistema de producción digitalizado para KIO",
+        solutions: ["tecnologia", "gestion"],
+      },
+      {
+        slug: "plataforma-diabetes",
+        title: "Plataforma de gestión para diabetes",
+        category: "Producto digital · Desarrollo web",
+        summary: "Desarrollo de una plataforma digital para registrar, organizar y visualizar información relacionada con el control de la diabetes.",
+        image: "/projects/plataforma-diabetes.jpg",
+        imageAlt: "Pantallas de la plataforma de gestión para diabetes",
+        solutions: ["web", "tecnologia"],
+      },
+      {
+        slug: "gestion-empresarial",
+        title: "Gestión empresarial",
+        category: "Asesoría · Procesos y sistemas",
+        summary: "Acompañamiento a organizaciones para ordenar procesos, fortalecer su gestión y convertir necesidades operativas en sistemas de trabajo más claros.",
+        photo: "reunion",
+        solutions: ["gestion"],
+      },
+      {
+        slug: "integra-sinergia",
         title: "Integra Sinergia",
         category: "Diseño web · Identidad digital",
         summary: "Sitio bilingüe, rápido y pensado para generar contacto.",
-        solutions: ["web"],
         image: "/showcase/integra-desktop.jpg",
         imageAlt: "Página de inicio del sitio de Integra Sinergia",
+        solutions: ["web"],
       },
     ],
-    upcoming: "Nuevos proyectos en preparación.",
+    experience: {
+      kicker: "Trayectoria",
+      title: "Experiencia en espacios técnicos y de cooperación regional.",
+      text: "Detrás de cada proyecto hay experiencia real en sostenibilidad, normalización y gestión.",
+    },
   },
   about: {
     title: "Personas reales detrás de soluciones reales.",
-    lead: "Integra Sinergia es una firma costarricense que conecta gestión, sostenibilidad y tecnología.",
-    why: {
-      title: "Por qué existe Integra",
-      text: "Una empresa no tiene un problema de procesos, otro ambiental y otro digital. Tiene un sistema que funciona mejor o peor. Integra nace para trabajar esas piezas juntas.",
+    lead: "Integra Sinergia es el proyecto. Fabiola y María Celeste son las personas detrás.",
+    who: {
+      title: "Quiénes somos",
+      text: "Una firma costarricense que conecta gestión, sostenibilidad, tecnología y diseño. Nace de una idea simple: una organización no tiene un problema de procesos, otro ambiental y otro digital. Tiene un sistema que funciona mejor o peor.",
     },
-    thinking: {
-      title: "Cómo pensamos",
+    howWeWork: {
+      title: "Nuestra forma de trabajar",
       principles: [
         { title: "Primero entender", text: "Antes de proponer, diagnosticamos." },
         { title: "Soluciones que se usan", text: "Lo que implementamos tiene que funcionar en el día a día." },
         { title: "Trato directo", text: "Trabajas con quienes hacen el trabajo." },
       ],
     },
-    team: {
-      title: "Equipo",
-      lead: "Ingeniería, gestión y pensamiento estratégico.",
+    experience: {
+      kicker: "Experiencia",
+      title: "Conocimiento técnico construido en el terreno.",
+      text: "Fabiola ha participado en espacios técnicos, foros y actividades de cooperación regional relacionados con:",
+      areas: [
+        "Sostenibilidad",
+        "Normalización",
+        "Refrigeración responsable",
+        "Ecoetiquetado",
+        "Compras públicas sostenibles",
+        "Industria",
+      ],
     },
+    people: { title: "Equipo" },
   },
   team: {
-    // TODO (Fabi): agregar fotografías profesionales en /public/team/ y validar biografías.
+    // TODO (Fabi): validar biografías.
     members: [
       {
         name: "Ing. Fabiola Sosa Duarte",
         initials: "FS",
         role: "Ingeniera Química · Cofundadora",
         bio: "Gestión ambiental, sistemas de gestión, sostenibilidad y mejora de procesos.",
-        photo: "/team/fabiola.jpg",
-        photoAlt: "Ing. Fabiola Sosa Duarte",
+        photo: "fabiola",
       },
       {
         name: "Ing. María Celeste Amaya",
         initials: "MA",
         role: "Ingeniera Química · Cofundadora",
         bio: "Gestión y mejora empresarial, con foco en soluciones técnicas que ordenan la operación.",
-        photo: "/team/maria.jpg",
-        photoAlt: "Ing. María Celeste Amaya",
+        photo: "mariaCeleste",
       },
     ],
-    pending: "Fotografía próximamente",
   },
   finalCta: {
-    title: "¿Qué necesita tu empresa?",
+    title: "¿Tienes un reto y no sabes por dónde empezar?",
     lead: "Cuéntanos dónde estás y hacia dónde quieres llegar.",
   },
   contact: {
-    title: "Cuéntanos qué necesita tu empresa.",
+    title: "Cuéntanos qué necesita tu organización.",
     lead: "Te respondemos personalmente. Si no sabes exactamente qué necesitas, también podemos ayudarte.",
     direct: { whatsapp: "WhatsApp", email: "Correo" },
     form: {
@@ -333,7 +396,7 @@ const es: Dictionary = {
   },
   whatsapp: {
     label: "Escríbenos por WhatsApp",
-    defaultMessage: "Hola, Integra Sinergia. Me gustaría conversar sobre lo que necesita mi empresa.",
+    defaultMessage: "Hola, Integra Sinergia. Me gustaría conversar sobre lo que necesita mi organización.",
   },
   footer: {
     line: "Crece con sistemas sólidos.",

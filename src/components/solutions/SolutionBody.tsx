@@ -84,7 +84,7 @@ export function Related({ lang, dict, solution }: Props) {
                 <Link href={solutionRoute(lang, id)} className="group flex items-center justify-between gap-4 p-6 transition-colors hover:bg-surface">
                   <span>
                     <span className="t-h3 block text-ink">{r.name}</span>
-                    <span className="t-small mt-1 block text-ink-2">{r.line}</span>
+                    <span className="t-small mt-1 block text-ink-2">{r.summary}</span>
                   </span>
                   <ArrowIcon className="size-4 shrink-0 text-ink-3 transition-transform duration-500 group-hover:translate-x-0.5" aria-hidden="true" />
                 </Link>

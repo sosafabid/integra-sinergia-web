@@ -78,7 +78,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
         >
           {dict.common.skip}
         </a>
-        <Navbar lang={lang} nav={dict.nav} common={dict.common} />
+        <Navbar lang={lang} nav={dict.nav} common={dict.common} solutions={dict.solutions.map((s) => ({ id: s.id, name: s.name }))} />
         <main id="contenido" className="flex-1">
           {children}
         </main>

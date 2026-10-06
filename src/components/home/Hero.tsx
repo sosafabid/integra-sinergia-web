@@ -4,7 +4,7 @@ import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Structure } from "@/components/ui/Structure";
 import { contactRoute, route } from "@/lib/routes";
 
-/** Una pantalla: mensaje, frase de apoyo y dos acciones. */
+/** Una pantalla: mensaje, una frase y dos acciones. */
 export function Hero({ dict, lang }: { dict: Dictionary; lang: Locale }) {
   const { hero } = dict.home;
   return (
@@ -15,10 +15,10 @@ export function Hero({ dict, lang }: { dict: Dictionary; lang: Locale }) {
             <span className="block">{hero.titleA}</span>
             <span className="block text-green">{hero.titleB}</span>
           </h1>
-          <p className="t-lead mt-7 max-w-[40ch] text-ink-2">{hero.lead}</p>
+          <p className="t-lead mt-7 max-w-[42ch] text-ink-2">{hero.lead}</p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <ButtonLink href={contactRoute(lang)}>{dict.ctaPrimary}</ButtonLink>
-            <ButtonLink href={route(lang, "solutions")} variant="secondary" arrow={false}>
+            <ButtonLink href={route(lang, "solutions")}>{hero.primary}</ButtonLink>
+            <ButtonLink href={contactRoute(lang)} variant="secondary" arrow={false}>
               {hero.secondary}
             </ButtonLink>
           </div>
