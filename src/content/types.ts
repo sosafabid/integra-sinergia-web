@@ -1,32 +1,27 @@
-import type { RouteKey } from "@/lib/routes";
+import type { RouteKey, SolutionId } from "@/lib/routes";
 
-export type AreaId = "gestion" | "sostenibilidad" | "cumplimiento" | "datos" | "automatizacion" | "web";
-export type PillarId = "gestion" | "sostenibilidad" | "tecnologia" | "digital";
-
+export type { SolutionId };
 export type NavLink = { key: RouteKey; label: string };
 export type PageMeta = { title: string; description: string };
 
-/** Detalle de cada servicio (vive en las páginas internas, no en la home). */
-export type SolutionArea = {
-  id: AreaId;
+export type Solution = {
+  id: SolutionId;
+  /** Nombre corto: "Gestión" */
   name: string;
-  /** Una línea. */
-  short: string;
-  /** Descripción para buscadores (≈150 caracteres). */
+  /** Nombre completo: "Gestión, procesos y sistemas" */
+  fullName: string;
+  /** Una línea para listados */
+  line: string;
+  /** Titular de la página: la promesa */
+  promise: string;
+  lead: string;
+  /** Descripción para buscadores (≈150 caracteres) */
   description: string;
   problem: string;
-  outcomes: string[];
-  why: string;
+  solution: string;
+  services: { title: string; text: string }[];
   cta: string;
-  related: AreaId[];
-};
-
-/** Los 4 grandes conceptos que agrupan las áreas. */
-export type Pillar = {
-  id: PillarId;
-  name: string;
-  line: string;
-  areas: AreaId[];
+  related: SolutionId[];
 };
 
 export type TeamMember = {
@@ -41,11 +36,9 @@ export type TeamMember = {
 
 export type Project = {
   title: string;
-  /** Cliente o "Proyecto propio". Solo con autorización del cliente. */
-  client: string;
-  problem: string;
-  solution: string;
-  areas: AreaId[];
+  category: string;
+  summary: string;
+  solutions: SolutionId[];
   image: string;
   imageAlt: string;
   href?: string;
@@ -53,7 +46,7 @@ export type Project = {
 
 export type Dictionary = {
   meta: { title: string; titleTemplate: string; description: string; keywords: string[] };
-  pages: Record<"solutions" | "projects" | "method" | "about" | "contact", PageMeta>;
+  pages: Record<"solutions" | "projects" | "about" | "contact", PageMeta>;
   common: {
     skip: string;
     homeLabel: string;
@@ -64,70 +57,45 @@ export type Dictionary = {
     menuClose: string;
   };
   nav: { links: NavLink[]; cta: string };
-  ui: {
-    home: string;
-    viewAll: string;
-    prev: string;
-    next: string;
-    related: string;
-    talkTitle: string;
-    talkText: string;
+  /** Botón principal de contenido (consistente en todo el sitio) */
+  ctaPrimary: string;
+  ui: { viewAll: string; related: string; backToSolutions: string; problem: string; solution: string; services: string; howWeWork: string };
+  home: {
+    hero: { titleA: string; titleB: string; lead: string; secondary: string };
+    idea: { kicker: string; title: string; pieces: string[]; text: string };
+    solutions: { kicker: string; title: string; cta: string };
+    showcase: { kicker: string; title: string; lead: string; cta: string; mockupAlt: string; mobileAlt: string };
+    projects: { kicker: string; title: string; cta: string };
+    team: { kicker: string; title: string; cta: string };
   };
-  hero: { title: string; lead: string; ctaPrimary: string; ctaSecondary: string };
-  manifesto: { title: string; pieces: string[]; closing: string };
-  pieces: { kicker: string; title: string; lead: string; cta: string; pillars: Pillar[] };
-  digital: { kicker: string; title: string; lead: string; cta: string; mockupAlt: string; mobileAlt: string };
-  automation: {
-    lines: [string, string];
-    lead: string;
-    cta: string;
-    /** Página interna */
-    examplesTitle: string;
-    examples: { title: string; text: string }[];
-  };
+  solutionsPage: { title: string; lead: string; unsure: { title: string; text: string } };
+  solutions: Solution[];
   web: {
-    /** Página interna de diseño web */
     processTitle: string;
-    process: string[];
+    process: { name: string; text: string }[];
+    projectsTitle: string;
   };
-  method: {
-    kicker: string;
+  method: { title: string; steps: { name: string; text: string }[] };
+  projects: { title: string; lead: string; items: Project[]; upcoming: string };
+  about: {
     title: string;
     lead: string;
-    steps: { name: string; text: string; output: string }[];
-    cta: string;
-    outputLabel: string;
+    why: { title: string; text: string };
+    thinking: { title: string; principles: { title: string; text: string }[] };
+    team: { title: string; lead: string };
   };
-  solutions: {
-    title: string;
-    lead: string;
-    labels: { problem: string; outcome: string; why: string };
-    areas: SolutionArea[];
-  };
-  projects: {
-    kicker: string;
-    title: string;
-    lead: string;
-    labels: { problem: string; solution: string };
-    items: Project[];
-    cta: string;
-    upcoming: string;
-  };
-  team: { kicker: string; title: string; lead: string; members: TeamMember[]; pending: string };
-  about: { title: string; lead: string; body: string[] };
-  finalCta: { title: string; lead: string; cta: string };
+  team: { members: TeamMember[]; pending: string };
+  finalCta: { title: string; lead: string };
   contact: {
-    kicker: string;
     title: string;
     lead: string;
-    direct: { title: string; whatsapp: string; email: string; phone: string; location: string; locationValue: string };
+    direct: { whatsapp: string; email: string };
     form: {
       name: string;
-      email: string;
       company: string;
+      email: string;
       phone: string;
       interest: string;
-      interestHint: string;
       unsure: string;
       message: string;
       messagePlaceholder: string;

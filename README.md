@@ -20,7 +20,7 @@ cp .env.example .env.local
 npm run dev
 ```
 
-4. Abre <http://localhost:3000> — te redirige a `/es` (o `/en` si tu navegador está en inglés).
+4. Abre <http://localhost:3000> (español). La versión en inglés está en <http://localhost:3000/en>.
 
 > En Windows, si `cp` no funciona, usa: `copy .env.example .env.local`
 
@@ -73,32 +73,41 @@ npm run start   # sirve el build localmente
 |---|---|
 | Textos en español / inglés | `src/content/es.ts` / `src/content/en.ts` |
 | Email, teléfonos, WhatsApp, dominio | `src/config/site.ts` |
-| Colores y tipografía | `src/app/globals.css` (bloque `@theme` y clases `.t-*`) |
-| Orden de la home | `src/app/[lang]/page.tsx` |
+| Colores, tipografía, botones | `src/app/globals.css` (bloque `@theme` y clases `.t-*`, `.btn`) |
+| Contenido de la home | `src/app/[lang]/page.tsx` |
+| Soluciones (textos de cada página) | `solutions` en `es.ts` / `en.ts` |
 | Proyectos | `projects.items` en `es.ts` / `en.ts` + imagen en `public/showcase/` |
-| Fotos del equipo | `public/team/` + campo `photo` en `es.ts` / `en.ts` |
-| Pasos del método | `method.steps` en `es.ts` / `en.ts` |
-| Logo | `public/brand/` |
+| Fotos del equipo | `public/team/` + campo `photo` en `team.members` |
+| URLs y traducción de rutas al inglés | `src/lib/routes.ts` |
+| Redirecciones de URLs antiguas | `next.config.ts` |
 
 ## 7. Mapa del sitio
 
+Español en la raíz, inglés bajo `/en` con URLs traducidas:
+
 ```
-/es                     Inicio: hero, manifiesto, piezas, diseño y tecnología, método, proyectos, equipo, CTA
-/es/soluciones          Los 4 conceptos (Gestión, Sostenibilidad, Tecnología, Presencia digital)
-/es/soluciones/<área>   6 páginas de detalle (diseño web y automatización con bloques propios)
-/es/proyectos           Proyectos (problema → solución)
-/es/nosotros            La firma y el equipo
-/es/metodologia         Comprender → Estandarizar → Mejorar → Escalar
-/es/contacto            Formulario + WhatsApp + correo (acepta ?area=web para preseleccionar)
+/                              /en
+/soluciones                    /en/solutions
+/soluciones/gestion            /en/solutions/management
+/soluciones/sostenibilidad     /en/solutions/sustainability
+/soluciones/cumplimiento       /en/solutions/compliance
+/soluciones/tecnologia         /en/solutions/technology
+/soluciones/diseno-web         /en/solutions/web-design
+/proyectos                     /en/projects
+/nosotros                      /en/about
+/contacto                      /en/contact      (acepta ?area=web para preseleccionar)
 ```
-Lo mismo en inglés bajo `/en/...`.
+
+Internamente las páginas viven en `src/app/[lang]/…` (segmentos en español) y `src/proxy.ts`
+traduce las URLs públicas. Las URLs de versiones anteriores (`/es/...`, `/metodologia`, slugs largos)
+redirigen de forma permanente a las nuevas.
 
 ## 8. Sistema visual
 
-- **Tipografías (2):** Instrument Serif para titulares, Hanken Grotesk para interfaz y texto. Autoalojadas en `src/fonts/`.
-- **Escala:** `.t-display`, `.t-h1`, `.t-h2`, `.t-h3`, `.t-lead`, `.t-caption`.
-- **Color:** papel `#F5F3EE` y carbón `#141B1B` como base. Azul petróleo `#0A3740` solo en la sección de diseño y tecnología. Verde y arena como acentos.
-- **Estructura:** `src/components/ui/Structure.tsx` es la geometría inspirada en el isotipo (no es el logo).
+- **Tipografía:** una sola familia, Instrument Sans (variable, autoalojada en `src/fonts/`).
+- **Escala:** `.t-hero` (64 px máx.), `.t-h1` (56), `.t-h2` (40), `.t-h3` (22), `.t-lead`, `.t-small`, `.t-label`.
+- **Color:** blanco y gris claro (`surface`) como base. Azul petróleo `#0A3740` para botones y bloques clave. Verde `#0A5C3E` como acento. Arena para detalles finos.
+- **Isotipo:** `src/components/ui/Structure.tsx` es una geometría inspirada en el isotipo (no es el logo). Solo aparece en el hero.
 - **Capturas del sitio** (`public/showcase/`): si cambia el hero, conviene volver a tomarlas.
 
 ## 9. Pendientes antes del lanzamiento
@@ -106,10 +115,10 @@ Lo mismo en inglés bajo `/en/...`.
 - [ ] **Logo en SVG** (los PNG actuales se recortaron de la tarjeta oficial; reemplazar en `public/brand/`).
 - [ ] **Fotos profesionales** de Fabiola y María Celeste (`public/team/`, formato 4:5, ~1200×1500 px).
 - [ ] Validar **biografías** del equipo.
-- [ ] Validar los textos de cada etapa del **método** (Comprender, Estandarizar, Mejorar, Escalar).
+- [ ] Validar los textos de cada etapa del **método** (Comprender, Estandarizar, Mejorar, Escalar) y las promesas de cada solución.
 - [ ] Confirmar **WhatsApp comercial** y **correo** definitivo (idealmente un correo con el dominio).
 - [ ] Crear el formulario en **Formspree** y configurar `NEXT_PUBLIC_FORMSPREE_ID`.
-- [ ] Agregar **proyectos reales** autorizados.
+- [ ] Agregar **proyectos reales** autorizados (nombre, categoría, una frase y captura).
 - [ ] Conectar dominio en Vercel y registrar el sitio en **Google Search Console** (enviar `sitemap.xml`).
 
 ## Reglas del proyecto

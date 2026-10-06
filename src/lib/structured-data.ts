@@ -21,14 +21,14 @@ export function buildJsonLd(dict: Dictionary) {
         address: { "@type": "PostalAddress", addressCountry: "CR" },
         areaServed: { "@type": "Country", name: "Costa Rica" },
         founder: siteConfig.founders.map((name) => ({ "@type": "Person", name, jobTitle: "Ingeniera Química" })),
-        knowsAbout: dict.solutions.areas.map((a) => a.name),
+        knowsAbout: dict.solutions.map((s) => s.fullName),
         availableLanguage: ["es", "en"],
         hasOfferCatalog: {
           "@type": "OfferCatalog",
           name: dict.pages.solutions.title,
-          itemListElement: dict.solutions.areas.map((a) => ({
+          itemListElement: dict.solutions.map((a) => ({
             "@type": "Offer",
-            itemOffered: { "@type": "Service", name: a.name, description: a.short },
+            itemOffered: { "@type": "Service", name: a.fullName, description: a.lead },
           })),
         },
       },

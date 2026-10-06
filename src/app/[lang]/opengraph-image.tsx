@@ -13,10 +13,11 @@ export default async function OpengraphImage({ params }: { params: Promise<{ lan
   const { lang: raw } = await params;
   const lang = hasLocale(raw) ? raw : defaultLocale;
   const dict = await getDictionary(lang);
-  const [logo, serif] = await Promise.all([
+  const [logo, font] = await Promise.all([
     readFile(join(process.cwd(), "public/brand/logo-horizontal.png")),
-    readFile(join(process.cwd(), "src/fonts/og-instrument-serif.woff")),
+    readFile(join(process.cwd(), "src/fonts/og-instrument-sans-600.woff")),
   ]);
+  const { titleA, titleB } = dict.home.hero;
 
   return new ImageResponse(
     (
@@ -27,16 +28,19 @@ export default async function OpengraphImage({ params }: { params: Promise<{ lan
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#f5f3ee",
+          background: "#ffffff",
           padding: "64px 80px",
+          borderBottom: "20px solid #0a3740",
+          fontFamily: "Instrument Sans",
         }}
       >
         <img src={`data:image/png;base64,${logo.toString("base64")}`} width={330} height={90} alt="" />
-        <div style={{ display: "flex", fontFamily: "Instrument Serif", fontSize: 104, lineHeight: 0.98, color: "#141b1b", maxWidth: 900, letterSpacing: -2 }}>
-          {dict.hero.title}
+        <div style={{ display: "flex", flexDirection: "column", fontSize: 76, lineHeight: 1.05, letterSpacing: -2.5 }}>
+          <span style={{ color: "#13201f" }}>{titleA}</span>
+          <span style={{ color: "#0a5c3e" }}>{titleB}</span>
         </div>
       </div>
     ),
-    { ...size, fonts: [{ name: "Instrument Serif", data: serif, style: "normal", weight: 400 }] },
+    { ...size, fonts: [{ name: "Instrument Sans", data: font, style: "normal", weight: 600 }] },
   );
 }

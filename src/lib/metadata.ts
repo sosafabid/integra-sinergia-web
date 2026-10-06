@@ -1,26 +1,24 @@
 import type { Metadata } from "next";
 import { locales, localeMeta, type Locale } from "@/i18n/config";
+import { localize } from "@/lib/routes";
 
 /**
  * Metadata por página: título, descripción, canonical y hreflang.
- * `path` es la ruta sin el prefijo de idioma (p. ej. "/metodologia").
+ * `path` es la ruta interna sin idioma (p. ej. "/soluciones/gestion").
  */
 export function pageMetadata(lang: Locale, path: string, title: string, description: string): Metadata {
+  const url = localize(lang, path);
   return {
     title,
     description,
     alternates: {
-      canonical: `/${lang}${path}`,
-      languages: {
-        "es-CR": `/es${path}`,
-        en: `/en${path}`,
-        "x-default": `/es${path}`,
-      },
+      canonical: url,
+      languages: { "es-CR": localize("es", path), en: localize("en", path), "x-default": localize("es", path) },
     },
     openGraph: {
       title,
       description,
-      url: `/${lang}${path}`,
+      url,
       locale: localeMeta[lang].ogLocale,
       alternateLocale: locales.filter((l) => l !== lang).map((l) => localeMeta[l].ogLocale),
       // Al definir openGraph en una página se reemplaza el del layout, por eso se repite la imagen.

@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import "../globals.css";
-import { fontSans, fontSerif } from "@/fonts";
+import { fontSans } from "@/fonts";
+import { localize } from "@/lib/routes";
 import { hasLocale, localeMeta, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { siteConfig, whatsappLink } from "@/config/site";
@@ -17,7 +18,7 @@ export function generateStaticParams() {
 }
 
 export const viewport: Viewport = {
-  themeColor: "#f5f3ee",
+  themeColor: "#ffffff",
   width: "device-width",
   initialScale: 1,
 };
@@ -37,15 +38,15 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
     authors: siteConfig.founders.map((name) => ({ name })),
     creator: siteConfig.name,
     alternates: {
-      canonical: `/${lang}`,
-      languages: { "es-CR": "/es", en: "/en", "x-default": "/es" },
+      canonical: localize(lang, ""),
+      languages: { "es-CR": "/", en: "/en", "x-default": "/" },
     },
     openGraph: {
       type: "website",
       siteName: siteConfig.name,
       title: meta.title,
       description: meta.description,
-      url: `/${lang}`,
+      url: localize(lang, ""),
       locale: localeMeta[lang].ogLocale,
       alternateLocale: locales.filter((l) => l !== lang).map((l) => localeMeta[l].ogLocale),
     },
@@ -63,17 +64,17 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
   return (
     <html
       lang={localeMeta[lang].htmlLang}
-      className={`${fontSans.variable} ${fontSerif.variable}`}
+      className={fontSans.variable}
       suppressHydrationWarning
     >
       <head>
         {/* Activa animaciones de aparición solo si hay JS (el contenido nunca queda oculto sin JS) */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
-      <body className="flex min-h-dvh flex-col bg-paper text-ink antialiased">
+      <body className="flex min-h-dvh flex-col bg-white text-ink antialiased">
         <a
           href="#contenido"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-paper"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-petrol focus:px-5 focus:py-3 focus:text-white"
         >
           {dict.common.skip}
         </a>
@@ -82,7 +83,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
           {children}
         </main>
         <Footer dict={dict} lang={lang} />
-        <WhatsAppFloat href={whatsappLink(dict.whatsapp.defaultMessage)} label={dict.whatsapp.label} />
+        <WhatsAppFloat href={whatsappLink(dict.whatsapp.defaultMessage)} label={dict.nav.cta} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(buildJsonLd(dict)).replace(/</g, "\\u003c") }}

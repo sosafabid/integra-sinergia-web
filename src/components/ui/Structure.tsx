@@ -35,9 +35,9 @@ export function Structure({ className = "", animated = true, tone = "ink" }: Pro
     [mid(C, v[3]), mid(v[1], v[2])],
   ];
 
-  const stroke = tone === "light" ? "rgb(245 243 238 / 0.32)" : "rgb(20 27 27 / 0.32)";
-  const strokeSoft = tone === "light" ? "rgb(245 243 238 / 0.14)" : "rgb(20 27 27 / 0.13)";
-  const nodeFill = tone === "light" ? "var(--color-petrol)" : "var(--color-paper)";
+  const stroke = tone === "light" ? "rgb(245 243 238 / 0.32)" : "rgb(10 55 64 / 0.5)";
+  const strokeSoft = tone === "light" ? "rgb(245 243 238 / 0.14)" : "rgb(10 55 64 / 0.18)";
+  const nodeFill = tone === "light" ? "var(--color-petrol)" : "var(--color-white)";
   const accent = tone === "light" ? "var(--color-sand-light)" : "var(--color-green)";
 
   // pathLength=1 normaliza el trazo: la animación no depende del tamaño en pantalla
@@ -54,7 +54,7 @@ export function Structure({ className = "", animated = true, tone = "ink" }: Pro
           x2={b.x}
           y2={b.y}
           stroke={strokeSoft}
-          strokeWidth={1}
+          strokeWidth={1.4}
           pathLength={1}
           className={animated ? "draw" : ""}
           style={anim(1400 + i * 160)}
@@ -68,7 +68,7 @@ export function Structure({ className = "", animated = true, tone = "ink" }: Pro
           x2={b.x}
           y2={b.y}
           stroke={stroke}
-          strokeWidth={1}
+          strokeWidth={1.4}
           pathLength={1}
           className={animated ? "draw" : ""}
           style={anim(200 + i * 140)}

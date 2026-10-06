@@ -4,25 +4,27 @@ import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Structure } from "@/components/ui/Structure";
 import { contactRoute, route } from "@/lib/routes";
 
+/** Una pantalla: mensaje, frase de apoyo y dos acciones. */
 export function Hero({ dict, lang }: { dict: Dictionary; lang: Locale }) {
-  const { hero } = dict;
+  const { hero } = dict.home;
   return (
     <section aria-labelledby="hero-title" className="relative overflow-hidden">
-      <Structure className="pointer-events-none absolute -right-[18vw] top-[4.75rem] h-[36vh] w-auto opacity-90 sm:-right-[8vw] lg:-right-[2vw] lg:top-[13vh] lg:h-[62vh] xl:right-[3vw]" />
-
-      <div className="wrap relative flex min-h-[100svh] flex-col justify-end pb-14 pt-[44vh] sm:pt-[40vh] lg:pb-20 lg:pt-40">
-        <h1 id="hero-title" className="t-display max-w-[11ch] text-ink">
-          {hero.title}
-        </h1>
-
-        <div className="mt-12 grid gap-10 border-t border-line pt-8 lg:mt-16 lg:grid-cols-12 lg:items-end">
-          <p className="t-lead max-w-[34ch] text-ink-2 lg:col-span-6">{hero.lead}</p>
-          <div className="flex flex-col gap-5 sm:flex-row sm:items-center lg:col-span-6 lg:justify-end lg:gap-8">
-            <ButtonLink href={contactRoute(lang)}>{hero.ctaPrimary}</ButtonLink>
-            <ButtonLink href={route(lang, "about")} variant="text" arrow={false} className="self-start sm:self-auto">
-              {hero.ctaSecondary}
+      <div className="wrap grid items-center gap-10 pb-20 pt-36 sm:pt-44 lg:min-h-[86svh] lg:grid-cols-12 lg:pb-20 lg:pt-28">
+        <div className="lg:col-span-8">
+          <h1 id="hero-title" className="t-hero text-ink">
+            <span className="block">{hero.titleA}</span>
+            <span className="block text-green">{hero.titleB}</span>
+          </h1>
+          <p className="t-lead mt-7 max-w-[40ch] text-ink-2">{hero.lead}</p>
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <ButtonLink href={contactRoute(lang)}>{dict.ctaPrimary}</ButtonLink>
+            <ButtonLink href={route(lang, "solutions")} variant="secondary" arrow={false}>
+              {hero.secondary}
             </ButtonLink>
           </div>
+        </div>
+        <div className="hidden lg:col-span-4 lg:block">
+          <Structure className="mx-auto h-auto w-full max-w-[26rem]" />
         </div>
       </div>
     </section>

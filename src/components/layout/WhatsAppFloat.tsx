@@ -36,7 +36,7 @@ export function WhatsAppFloat({ href, label }: { href: string; label: string }) 
       rel="noopener noreferrer"
       tabIndex={visible ? 0 : -1}
       aria-hidden={!visible}
-      className={`fixed bottom-4 right-4 z-40 inline-flex min-h-12 items-center gap-2 rounded-full bg-ink py-3 pl-4 pr-5 text-sm font-semibold text-paper shadow-[0_10px_30px_-10px_rgb(5_26_31/0.6)] transition-[opacity,transform] duration-500 md:hidden ${
+      className={`fixed bottom-4 right-4 z-40 inline-flex min-h-12 items-center gap-2 rounded-full bg-petrol py-3 pl-4 pr-5 text-sm font-semibold text-white shadow-[0_10px_30px_-10px_rgb(5_26_31/0.6)] transition-[opacity,transform] duration-500 md:hidden ${
         visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
       }`}
       style={{ marginBottom: "env(safe-area-inset-bottom)" }}

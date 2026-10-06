@@ -3,16 +3,16 @@ import { notFound } from "next/navigation";
 import { hasLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { pageMetadata } from "@/lib/metadata";
-import { paths } from "@/lib/routes";
-import { PageHeader } from "@/components/ui/PageHeader";
-import { ProjectItem, UpcomingNote } from "@/components/home/ProjectsShowcase";
-import { FinalCta } from "@/components/home/FinalCta";
+import { pathOf } from "@/lib/routes";
+import { PageHero } from "@/components/ui/PageHero";
+import { ProjectsGrid } from "@/components/shared/ProjectsGrid";
+import { CtaBand } from "@/components/shared/CtaBand";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/proyectos">): Promise<Metadata> {
   const { lang } = await params;
   if (!hasLocale(lang)) return {};
   const { pages } = await getDictionary(lang);
-  return pageMetadata(lang, paths.projects, pages.projects.title, pages.projects.description);
+  return pageMetadata(lang, pathOf("projects"), pages.projects.title, pages.projects.description);
 }
 
 export default async function ProjectsPage({ params }: PageProps<"/[lang]/proyectos">) {
@@ -23,18 +23,14 @@ export default async function ProjectsPage({ params }: PageProps<"/[lang]/proyec
 
   return (
     <>
-      <PageHeader kicker={projects.kicker} title={projects.title} lead={projects.lead} />
-      <section aria-label={projects.kicker} className="pb-28 lg:pb-40">
-        <div className="wrap space-y-28 lg:space-y-40">
-          {projects.items.map((p) => (
-            <ProjectItem key={p.title} project={p} labels={projects.labels} />
-          ))}
-        </div>
+      <PageHero title={projects.title} lead={projects.lead} />
+      <section aria-label={projects.title} className="py-16 lg:py-24">
         <div className="wrap">
-          <UpcomingNote text={projects.upcoming} />
+          <ProjectsGrid items={projects.items} />
+          <p className="t-small mt-16 border-t border-line pt-6 text-ink-3">{projects.upcoming}</p>
         </div>
       </section>
-      <FinalCta dict={dict} lang={lang} />
+      <CtaBand dict={dict} lang={lang} />
     </>
   );
 }
