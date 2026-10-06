@@ -1,19 +1,21 @@
 "use client";
 
-import { useEffect, useRef, type ElementType, type ReactNode, type CSSProperties } from "react";
+import { useEffect, useRef, type CSSProperties, type ElementType, type ReactNode } from "react";
 
 type RevealProps = {
-  children: ReactNode;
+  children?: ReactNode;
   as?: ElementType;
   delay?: number;
   className?: string;
+  /** "fade" (por defecto) o "mask" para revelar imágenes */
+  variant?: "fade" | "mask" | "none";
 };
 
 /**
- * Aparición suave al entrar en pantalla. Ligero: un IntersectionObserver por elemento,
- * se desconecta después de mostrarse. Respeta prefers-reduced-motion vía CSS.
+ * Marca el elemento como visible al entrar en pantalla (una sola vez).
+ * La animación la define el CSS (.reveal, .reveal-mask, .connector).
  */
-export function Reveal({ children, as: Tag = "div", delay = 0, className = "" }: RevealProps) {
+export function Reveal({ children, as: Tag = "div", delay = 0, className = "", variant = "fade" }: RevealProps) {
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -23,23 +25,25 @@ export function Reveal({ children, as: Tag = "div", delay = 0, className = "" }:
       el.dataset.visible = "true";
       return;
     }
+    // Un elemento con clip-path no "intersecta" mientras está recortado,
+    // así que en la variante "mask" se observa al contenedor padre.
+    const target = variant === "mask" && el.parentElement ? el.parentElement : el;
     const observer = new IntersectionObserver(
       (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            (entry.target as HTMLElement).dataset.visible = "true";
-            observer.unobserve(entry.target);
-          }
+        if (entries.some((entry) => entry.isIntersecting)) {
+          el.dataset.visible = "true";
+          observer.disconnect();
         }
       },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.05 },
     );
-    observer.observe(el);
+    observer.observe(target);
     return () => observer.disconnect();
-  }, []);
+  }, [variant]);
 
+  const cls = variant === "fade" ? "reveal" : variant === "mask" ? "reveal-mask" : "";
   return (
-    <Tag ref={ref} className={`reveal ${className}`} style={{ "--reveal-delay": `${delay}ms` } as CSSProperties}>
+    <Tag ref={ref} className={`${cls} ${className}`} style={{ "--reveal-delay": `${delay}ms` } as CSSProperties}>
       {children}
     </Tag>
   );

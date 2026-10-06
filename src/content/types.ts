@@ -1,204 +1,126 @@
-export type AreaId = "gestion" | "sostenibilidad" | "cumplimiento" | "datos" | "automatizacion" | "web";
-
 import type { RouteKey } from "@/lib/routes";
 
-export type NavLink = { key: RouteKey; label: string };
+export type AreaId = "gestion" | "sostenibilidad" | "cumplimiento" | "datos" | "automatizacion" | "web";
+export type PillarId = "gestion" | "sostenibilidad" | "tecnologia" | "digital";
 
+export type NavLink = { key: RouteKey; label: string };
 export type PageMeta = { title: string; description: string };
 
+/** Detalle de cada servicio (vive en las páginas internas, no en la home). */
 export type SolutionArea = {
   id: AreaId;
   name: string;
-  /** Nombre corto para diagramas y chips */
-  label: string;
+  /** Una línea. */
   short: string;
-  /** Descripción para buscadores (≈150 caracteres) */
+  /** Descripción para buscadores (≈150 caracteres). */
   description: string;
   problem: string;
   outcomes: string[];
   why: string;
   cta: string;
-  connects: AreaId[];
+  related: AreaId[];
+};
+
+/** Los 4 grandes conceptos que agrupan las áreas. */
+export type Pillar = {
+  id: PillarId;
+  name: string;
+  line: string;
+  areas: AreaId[];
 };
 
 export type TeamMember = {
   name: string;
   initials: string;
-  credential: string;
   role: string;
   bio: string;
-  focus: string[];
-  /** Ruta en /public (p. ej. /team/fabiola.jpg). Vacío = se muestra un retrato provisional. */
+  /** Ruta en /public (p. ej. /team/fabiola.jpg). Vacío = retrato provisional. */
   photo?: string;
   photoAlt: string;
 };
 
 export type Project = {
   title: string;
+  /** Cliente o "Proyecto propio". Solo con autorización del cliente. */
   client: string;
+  problem: string;
+  solution: string;
   areas: AreaId[];
-  summary: string;
-  result?: string;
-  image?: string;
+  image: string;
+  imageAlt: string;
+  href?: string;
 };
 
 export type Dictionary = {
-  meta: {
-    title: string;
-    titleTemplate: string;
-    description: string;
-    keywords: string[];
-    ogAlt: string;
-  };
-  pages: {
-    solutions: PageMeta;
-    method: PageMeta;
-    about: PageMeta;
-    contact: PageMeta;
-  };
-  ui: {
-    breadcrumbHome: string;
-    viewSolution: string;
-    allSolutions: string;
-    prev: string;
-    next: string;
-    otherSolutions: string;
-    talkTitle: string;
-    talkText: string;
-  };
-  home: {
-    solutionsKicker: string;
-    solutionsTitle: string;
-    solutionsLead: string;
-    explore: { key: RouteKey; kicker: string; title: string; text: string; cta: string }[];
-  };
-  about: {
-    kicker: string;
-    title: string;
-    lead: string;
-  };
+  meta: { title: string; titleTemplate: string; description: string; keywords: string[] };
+  pages: Record<"solutions" | "projects" | "method" | "about" | "contact", PageMeta>;
   common: {
     skip: string;
     homeLabel: string;
     homeShort: string;
-    language: string;
     switchTo: string;
     switchToShort: string;
+    menuOpen: string;
+    menuClose: string;
   };
-  nav: {
-    links: NavLink[];
+  nav: { links: NavLink[]; cta: string };
+  ui: {
+    home: string;
+    viewAll: string;
+    prev: string;
+    next: string;
+    related: string;
+    talkTitle: string;
+    talkText: string;
+  };
+  hero: { title: string; lead: string; ctaPrimary: string; ctaSecondary: string };
+  manifesto: { title: string; pieces: string[]; closing: string };
+  pieces: { kicker: string; title: string; lead: string; cta: string; pillars: Pillar[] };
+  digital: { kicker: string; title: string; lead: string; cta: string; mockupAlt: string; mobileAlt: string };
+  automation: {
+    lines: [string, string];
+    lead: string;
     cta: string;
-    open: string;
-    close: string;
+    /** Página interna */
+    examplesTitle: string;
+    examples: { title: string; text: string }[];
   };
-  hero: {
-    eyebrow: string;
-    titleBefore: string;
-    titleAccent: string;
-    titleAfter: string;
-    lead: string;
-    ctaPrimary: string;
-    ctaSecondary: string;
-    tagline: string;
-    diagramTitle: string;
-    diagramCenter: string;
-    scroll: string;
-  };
-  problem: {
-    kicker: string;
-    title: string;
-    lead: string;
-    symptoms: { area: AreaId; text: string }[];
-    closing: string;
-  };
-  connected: {
-    kicker: string;
-    titleBefore: string;
-    titleAccent: string;
-    lead: string;
-    fragmented: { title: string; caption: string; items: string[] };
-    integrated: { title: string; caption: string; center: string };
-    principles: { title: string; text: string }[];
-  };
-  solutions: {
-    kicker: string;
-    title: string;
-    lead: string;
-    labels: { problem: string; outcome: string; why: string; connects: string };
-    areas: SolutionArea[];
-    unsure: { title: string; text: string; cta: string };
+  web: {
+    /** Página interna de diseño web */
+    processTitle: string;
+    process: string[];
   };
   method: {
     kicker: string;
     title: string;
     lead: string;
+    steps: { name: string; text: string; output: string }[];
+    cta: string;
     outputLabel: string;
-    steps: { letter: string; name: string; text: string; output: string }[];
-    cta: string;
   };
-  web: {
-    kicker: string;
-    titleBefore: string;
-    titleAccent: string;
-    lead: string;
-    processTitle: string;
-    steps: { name: string; text: string }[];
-    mockup: { url: string; annotations: string[] };
-    deliverablesTitle: string;
-    deliverables: { title: string; text: string }[];
-    proof: { title: string; text: string; specs: string[] };
-    cta: string;
-    secondary: string;
-  };
-  automation: {
-    kicker: string;
+  solutions: {
     title: string;
     lead: string;
-    flow: string[];
-    principle: string;
-    examplesTitle: string;
-    examples: { title: string; text: string }[];
-    cta: string;
-  };
-  sectors: {
-    kicker: string;
-    title: string;
-    lead: string;
-    items: { name: string; text: string }[];
-  };
-  team: {
-    kicker: string;
-    title: string;
-    lead: string;
-    focusLabel: string;
-    members: TeamMember[];
-    portraitPending: string;
+    labels: { problem: string; outcome: string; why: string };
+    areas: SolutionArea[];
   };
   projects: {
     kicker: string;
     title: string;
     lead: string;
+    labels: { problem: string; solution: string };
     items: Project[];
+    cta: string;
+    upcoming: string;
   };
-  finalCta: {
-    title: string;
-    titleAccent: string;
-    lead: string;
-    primary: string;
-    whatsapp: string;
-  };
+  team: { kicker: string; title: string; lead: string; members: TeamMember[]; pending: string };
+  about: { title: string; lead: string; body: string[] };
+  finalCta: { title: string; lead: string; cta: string };
   contact: {
     kicker: string;
     title: string;
     lead: string;
-    direct: {
-      title: string;
-      whatsapp: string;
-      email: string;
-      phone: string;
-      location: string;
-      locationValue: string;
-    };
+    direct: { title: string; whatsapp: string; email: string; phone: string; location: string; locationValue: string };
     form: {
       name: string;
       email: string;
@@ -210,7 +132,6 @@ export type Dictionary = {
       message: string;
       messagePlaceholder: string;
       optional: string;
-      required: string;
       submit: string;
       sending: string;
       successTitle: string;
@@ -222,22 +143,7 @@ export type Dictionary = {
       privacy: string;
     };
   };
-  whatsapp: {
-    floating: string;
-    defaultMessage: string;
-  };
-  footer: {
-    description: string;
-    solutionsTitle: string;
-    companyTitle: string;
-    contactTitle: string;
-    companyLinks: NavLink[];
-    rights: string;
-    builtBy: string;
-  };
-  notFound: {
-    title: string;
-    text: string;
-    cta: string;
-  };
+  whatsapp: { label: string; defaultMessage: string };
+  footer: { line: string; rights: string };
+  notFound: { title: string; text: string; cta: string };
 };

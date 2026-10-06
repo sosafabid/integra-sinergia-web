@@ -2,39 +2,40 @@ import Link from "next/link";
 import type { AnchorHTMLAttributes, ReactNode } from "react";
 import { ArrowIcon } from "./icons";
 
-type Variant = "primary" | "secondary" | "ghost" | "light" | "outline-light";
+type Variant = "solid" | "light" | "text" | "text-light";
 
-const base =
-  "group inline-flex items-center justify-center gap-2.5 rounded-full text-[0.95rem] font-semibold tracking-[-0.005em] transition-[background-color,color,border-color,box-shadow,transform] duration-300 ease-[var(--ease-out-soft)] min-h-12 px-6 active:scale-[0.98]";
-
-const variants: Record<Variant, string> = {
-  primary: "bg-petrol-900 text-sand-50 hover:bg-green-800 shadow-[0_1px_0_rgb(255_255_255/0.08)_inset]",
-  secondary: "border border-line-strong text-petrol-900 hover:border-petrol-900 hover:bg-white",
-  ghost: "px-0 min-h-0 text-petrol-900 underline-offset-4 hover:text-green-700",
-  light: "bg-sand-50 text-petrol-900 hover:bg-white",
-  "outline-light": "border border-white/25 text-sand-50 hover:border-sand-50 hover:bg-white/5",
+const styles: Record<Variant, string> = {
+  solid:
+    "min-h-12 rounded-full bg-ink px-7 text-paper hover:bg-petrol",
+  light:
+    "min-h-12 rounded-full bg-paper px-7 text-ink hover:bg-white",
+  text: "text-ink",
+  "text-light": "text-paper",
 };
 
 type Props = AnchorHTMLAttributes<HTMLAnchorElement> & {
   variant?: Variant;
-  children: ReactNode;
   arrow?: boolean;
   icon?: ReactNode;
+  children: ReactNode;
 };
 
-/** Enlace con apariencia de botón (los CTA del sitio son navegación, no acciones). */
-export function ButtonLink({ variant = "primary", arrow = true, icon, className = "", children, href = "#", ...rest }: Props) {
+/**
+ * Enlaces de acción. Rutas internas → next/link (navegación instantánea);
+ * externas (WhatsApp, mailto) → <a>.
+ */
+export function ButtonLink({ variant = "solid", arrow = true, icon, className = "", children, href = "#", ...rest }: Props) {
+  const isText = variant === "text" || variant === "text-light";
+  const cls = `group inline-flex items-center justify-center gap-3 text-[0.95rem] font-medium tracking-[-0.005em] transition-colors duration-300 ${styles[variant]} ${className}`;
   const content = (
     <>
       {icon}
-      <span>{children}</span>
+      <span className={isText ? "link-line" : ""}>{children}</span>
       {arrow && (
-        <ArrowIcon className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
+        <ArrowIcon className="size-4 transition-transform duration-500 ease-[var(--ease-out-soft)] group-hover:translate-x-1" aria-hidden="true" />
       )}
     </>
   );
-  const cls = `${base} ${variants[variant]} ${className}`;
-  // Rutas internas → navegación instantánea con next/link; externas (WhatsApp, mailto) → <a>
   if (href.startsWith("/")) {
     return (
       <Link href={href} className={cls} {...rest}>

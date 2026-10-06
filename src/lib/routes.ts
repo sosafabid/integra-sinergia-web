@@ -15,12 +15,13 @@ export function areaFromSlug(slug: string): AreaId | undefined {
   return (Object.keys(areaSlugs) as AreaId[]).find((id) => areaSlugs[id] === slug);
 }
 
-export type RouteKey = "home" | "solutions" | "method" | "about" | "contact" | "web" | "automation";
+export type RouteKey = "home" | "solutions" | "projects" | "method" | "about" | "contact" | "web" | "automation";
 
 /** Rutas sin prefijo de idioma (útil para hreflang, sitemap y cambio de idioma). */
 export const paths: Record<RouteKey, string> = {
   home: "",
   solutions: "/soluciones",
+  projects: "/proyectos",
   method: "/metodologia",
   about: "/nosotros",
   contact: "/contacto",

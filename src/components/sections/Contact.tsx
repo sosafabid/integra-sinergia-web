@@ -1,64 +1,49 @@
 import type { Dictionary } from "@/content/types";
 import type { Locale } from "@/i18n/config";
-import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal } from "@/components/ui/Reveal";
-import { MailIcon, PhoneIcon, PinIcon, WhatsAppIcon } from "@/components/ui/icons";
 import { siteConfig, whatsappLink } from "@/config/site";
 import { ContactForm } from "./ContactForm";
 
-export function Contact({ dict, lang, withHeader = true }: { dict: Dictionary; lang: Locale; withHeader?: boolean }) {
+/** Canales directos + formulario. El encabezado lo pone la página. */
+export function Contact({ dict, lang }: { dict: Dictionary; lang: Locale }) {
   const { contact, solutions, whatsapp } = dict;
-  const row = "flex items-start gap-4 py-4 border-b border-line";
-  const icon = "mt-0.5 size-5 shrink-0 text-green-700";
+  const row = "border-b border-line py-5";
 
   return (
-    <section id="contacto" aria-labelledby={withHeader ? "contacto-title" : undefined} aria-label={withHeader ? undefined : contact.kicker} className="py-20 lg:py-28">
-      <div className="container-site grid gap-14 lg:grid-cols-12 lg:gap-10">
-        <div className="lg:col-span-5">
-          {withHeader && <SectionHeader id="contacto-title" kicker={contact.kicker} title={contact.title} lead={contact.lead} />}
-          <Reveal delay={150} className={withHeader ? "mt-12" : ""}>
-            <h3 className="eyebrow text-sand-700">{contact.direct.title}</h3>
-            <ul className="mt-4 border-t border-line">
-              <li>
-                <a href={whatsappLink(whatsapp.defaultMessage)} target="_blank" rel="noopener noreferrer" className={`${row} group`}>
-                  <WhatsAppIcon className={icon} aria-hidden="true" />
-                  <span>
-                    <span className="block text-[0.8rem] text-ink-muted">{contact.direct.whatsapp}</span>
-                    <span className="font-semibold text-petrol-900 group-hover:text-green-700">{whatsapp.floating}</span>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href={`mailto:${siteConfig.email}`} className={`${row} group`}>
-                  <MailIcon className={icon} aria-hidden="true" />
-                  <span className="min-w-0">
-                    <span className="block text-[0.8rem] text-ink-muted">{contact.direct.email}</span>
-                    <span className="break-all font-semibold text-petrol-900 group-hover:text-green-700">{siteConfig.email}</span>
-                  </span>
-                </a>
-              </li>
-              <li className={row}>
-                <PhoneIcon className={icon} aria-hidden="true" />
-                <span>
-                  <span className="block text-[0.8rem] text-ink-muted">{contact.direct.phone}</span>
-                  {siteConfig.phones.map((p) => (
-                    <a key={p.tel} href={`tel:${p.tel}`} className="mr-4 inline-block font-semibold text-petrol-900 hover:text-green-700">
-                      {p.display}
-                    </a>
-                  ))}
-                </span>
-              </li>
-              <li className={row}>
-                <PinIcon className={icon} aria-hidden="true" />
-                <span>
-                  <span className="block text-[0.8rem] text-ink-muted">{contact.direct.location}</span>
-                  <span className="font-semibold text-petrol-900">{contact.direct.locationValue}</span>
-                </span>
-              </li>
-            </ul>
-          </Reveal>
-        </div>
-        <Reveal delay={100} className="lg:col-span-7">
+    <section id="contacto" aria-label={contact.kicker} className="pb-28 pt-4 lg:pb-40">
+      <div className="wrap grid gap-16 lg:grid-cols-12 lg:gap-10">
+        <Reveal className="lg:col-span-4">
+          <h2 className="t-caption text-ink-3">{contact.direct.title}</h2>
+          <ul className="mt-4 border-t border-line">
+            <li className={row}>
+              <p className="t-caption text-ink-3">{contact.direct.whatsapp}</p>
+              <a href={whatsappLink(whatsapp.defaultMessage)} target="_blank" rel="noopener noreferrer" className="link-line mt-1 inline-block text-lg text-ink">
+                {whatsapp.label}
+              </a>
+            </li>
+            <li className={row}>
+              <p className="t-caption text-ink-3">{contact.direct.email}</p>
+              <a href={`mailto:${siteConfig.email}`} className="link-line mt-1 inline-block break-all text-lg text-ink">
+                {siteConfig.email}
+              </a>
+            </li>
+            <li className={row}>
+              <p className="t-caption text-ink-3">{contact.direct.phone}</p>
+              <p className="mt-1 flex flex-wrap gap-x-5">
+                {siteConfig.phones.map((p) => (
+                  <a key={p.tel} href={`tel:${p.tel}`} className="link-line text-lg text-ink">
+                    {p.display}
+                  </a>
+                ))}
+              </p>
+            </li>
+            <li className={row}>
+              <p className="t-caption text-ink-3">{contact.direct.location}</p>
+              <p className="mt-1 text-lg text-ink">{contact.direct.locationValue}</p>
+            </li>
+          </ul>
+        </Reveal>
+        <Reveal delay={120} className="lg:col-span-7 lg:col-start-6">
           <ContactForm lang={lang} form={contact.form} areas={solutions.areas} whatsappMessage={whatsapp.defaultMessage} />
         </Reveal>
       </div>

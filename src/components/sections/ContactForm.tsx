@@ -102,19 +102,19 @@ export function ContactForm({ lang, form, areas, whatsappMessage }: Props) {
   }
 
   const inputBase =
-    "mt-2 block w-full rounded-xl border bg-white px-4 py-3.5 text-base text-ink placeholder:text-ink-muted/60 transition-[border-color,box-shadow] duration-200 focus:border-petrol-900 focus:outline-none focus:ring-4 focus:ring-petrol-900/10";
-  const fieldClass = (f?: Field) => `${inputBase} ${f && errors[f] ? "border-red-700/70" : "border-line-strong"}`;
-  const labelClass = "text-[0.9rem] font-semibold text-petrol-900";
-  const hint = (t: string) => <span className="ml-1.5 font-normal text-ink-muted">({t})</span>;
+    "mt-1 block w-full rounded-none border-0 border-b bg-transparent px-0 py-3 text-[1.0625rem] text-ink placeholder:text-ink-3/70 transition-[border-color] duration-300 focus:border-ink focus:outline-none";
+  const fieldClass = (f?: Field) => `${inputBase} ${f && errors[f] ? "border-red-700/70" : "border-line-2"}`;
+  const labelClass = "t-caption text-ink-2";
+  const hint = (t: string) => <span className="ml-1.5 font-normal text-ink-3">({t})</span>;
 
   if (status === "success") {
     return (
-      <div ref={statusRef} tabIndex={-1} role="status" className="rounded-3xl border border-green-700/30 bg-white p-8 sm:p-10">
-        <span className="flex size-12 items-center justify-center rounded-full bg-green-700 text-sand-50">
+      <div ref={statusRef} tabIndex={-1} role="status" className="border-t border-ink pt-10">
+        <span className="flex size-12 items-center justify-center rounded-full bg-green text-paper">
           <CheckIcon className="size-6" aria-hidden="true" />
         </span>
-        <p className="display-3 mt-6 text-petrol-900">{form.successTitle}</p>
-        <p className="mt-3 leading-relaxed text-ink-soft">{form.successText}</p>
+        <p className="t-h2 mt-6 text-ink">{form.successTitle}</p>
+        <p className="mt-3 leading-relaxed text-ink-2">{form.successText}</p>
       </div>
     );
   }
@@ -124,11 +124,11 @@ export function ContactForm({ lang, form, areas, whatsappMessage }: Props) {
       ref={formRef}
       noValidate
       onSubmit={onSubmit}
-      className="rounded-3xl border border-line bg-white p-6 shadow-[0_30px_60px_-45px_rgb(8_48_58/0.45)] sm:p-9"
+      className="lg:pt-2"
     >
       <fieldset>
         <legend className={labelClass}>{form.interest}</legend>
-        <p className="mt-1 text-[0.85rem] text-ink-muted">{form.interestHint}</p>
+        <p className="mt-2 text-[0.85rem] text-ink-3">{form.interestHint}</p>
         <div className="mt-4 flex flex-wrap gap-2">
           {options.map((o) => {
             const checked = interests.includes(o.id);
@@ -136,12 +136,12 @@ export function ContactForm({ lang, form, areas, whatsappMessage }: Props) {
             return (
               <label
                 key={o.id}
-                className={`relative inline-flex cursor-pointer select-none items-center gap-2 rounded-full border px-4 py-2.5 text-[0.88rem] font-medium transition-colors duration-200 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-green-700 has-[:focus-visible]:ring-offset-2 ${
+                className={`relative inline-flex cursor-pointer select-none items-center gap-2 rounded-full border px-4 py-2.5 text-[0.88rem] font-medium transition-colors duration-200 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-green has-[:focus-visible]:ring-offset-2 ${
                   checked
-                    ? "border-petrol-900 bg-petrol-900 text-sand-50"
+                    ? "border-ink bg-ink text-paper"
                     : isUnsure
-                      ? "border-dashed border-sand-500 text-petrol-900 hover:border-petrol-900"
-                      : "border-line-strong text-petrol-900 hover:border-petrol-900"
+                      ? "border-dashed border-sand text-ink hover:border-ink"
+                      : "border-line-2 text-ink hover:border-ink"
                 }`}
               >
                 <input
@@ -160,7 +160,7 @@ export function ContactForm({ lang, form, areas, whatsappMessage }: Props) {
         </div>
       </fieldset>
 
-      <div className="mt-8 grid gap-5 sm:grid-cols-2">
+      <div className="mt-12 grid gap-x-8 gap-y-8 sm:grid-cols-2">
         <div>
           <label htmlFor={`${uid}-name`} className={labelClass}>
             {form.name}
@@ -251,13 +251,13 @@ export function ContactForm({ lang, form, areas, whatsappMessage }: Props) {
           <p className="mt-6 rounded-xl bg-red-50 px-4 py-3 text-[0.9rem] text-red-900">{form.error}</p>
         )}
         {status === "not-configured" && (
-          <div className="mt-6 rounded-xl bg-sand-100 px-4 py-4 text-[0.9rem] text-petrol-900">
+          <div className="mt-6 rounded-xl bg-paper-2 px-4 py-4 text-[0.9rem] text-ink">
             <p>{form.notConfigured}</p>
             <a
               href={whatsappLink(whatsappMessage)}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 inline-flex items-center gap-2 font-semibold text-green-800 underline underline-offset-4"
+              className="mt-3 inline-flex items-center gap-2 font-medium text-green underline underline-offset-4"
             >
               <WhatsAppIcon className="size-4" aria-hidden="true" />
               WhatsApp
@@ -267,11 +267,11 @@ export function ContactForm({ lang, form, areas, whatsappMessage }: Props) {
       </div>
 
       <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <p className="max-w-xs text-[0.8rem] leading-relaxed text-ink-muted">{form.privacy}</p>
+        <p className="max-w-xs text-[0.8rem] leading-relaxed text-ink-3">{form.privacy}</p>
         <button
           type="submit"
           disabled={status === "sending"}
-          className="group inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full bg-petrol-900 px-7 text-[0.95rem] font-semibold text-sand-50 transition-colors duration-300 hover:bg-green-800 disabled:cursor-wait disabled:opacity-70"
+          className="group inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full bg-ink px-7 text-[0.95rem] font-medium text-paper transition-colors duration-300 hover:bg-petrol disabled:cursor-wait disabled:opacity-70"
         >
           {status === "sending" ? form.sending : form.submit}
           <ArrowIcon className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />

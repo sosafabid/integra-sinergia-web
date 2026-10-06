@@ -1,17 +1,19 @@
 import { notFound } from "next/navigation";
 import { hasLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import { route } from "@/lib/routes";
-import { Hero } from "@/components/sections/Hero";
-import { FinalCta } from "@/components/sections/FinalCta";
-import { SolutionsGrid } from "@/components/solutions/SolutionsGrid";
-import { ExploreCards } from "@/components/home/ExploreCards";
-import { SectionHeader } from "@/components/ui/SectionHeader";
-import { ButtonLink } from "@/components/ui/ButtonLink";
+import { Hero } from "@/components/home/Hero";
+import { Manifesto } from "@/components/home/Manifesto";
+import { Pieces } from "@/components/home/Pieces";
+import { DigitalShowcase } from "@/components/home/DigitalShowcase";
+import { Automation } from "@/components/home/Automation";
+import { MethodLine } from "@/components/home/MethodLine";
+import { ProjectsShowcase } from "@/components/home/ProjectsShowcase";
+import { TeamSection } from "@/components/home/TeamSection";
+import { FinalCta } from "@/components/home/FinalCta";
 
 /**
- * Inicio: visión general + accesos. El detalle vive en páginas propias
- * (soluciones, metodología, nosotros, contacto).
+ * Inicio. Genera deseo de conocer más; la profundidad vive en las páginas internas.
+ * Hero → Manifiesto → Piezas → Diseño y tecnología → Método → Proyectos → Equipo → CTA
  */
 export default async function HomePage({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
@@ -21,33 +23,13 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
   return (
     <>
       <Hero dict={dict} lang={lang} />
-
-      <section aria-labelledby="home-soluciones" className="border-t border-line bg-sand-100 py-20 lg:py-28">
-        <div className="container-site">
-          <SectionHeader
-            id="home-soluciones"
-            kicker={dict.home.solutionsKicker}
-            title={dict.home.solutionsTitle}
-            lead={dict.home.solutionsLead}
-            align="split"
-          />
-          <div className="mt-12 lg:mt-16">
-            <SolutionsGrid lang={lang} solutions={dict.solutions} viewLabel={dict.ui.viewSolution} />
-          </div>
-          <div className="mt-10 flex justify-center">
-            <ButtonLink href={route(lang, "solutions")} variant="secondary">
-              {dict.ui.allSolutions}
-            </ButtonLink>
-          </div>
-        </div>
-      </section>
-
-      <section aria-label={dict.home.explore.map((c) => c.title).join(" · ")} className="py-20 lg:py-24">
-        <div className="container-site">
-          <ExploreCards lang={lang} dict={dict} />
-        </div>
-      </section>
-
+      <Manifesto dict={dict} />
+      <Pieces dict={dict} lang={lang} />
+      <DigitalShowcase dict={dict} lang={lang} />
+      <Automation dict={dict} lang={lang} />
+      <MethodLine dict={dict} lang={lang} />
+      <ProjectsShowcase dict={dict} lang={lang} />
+      <TeamSection dict={dict} />
       <FinalCta dict={dict} lang={lang} />
     </>
   );

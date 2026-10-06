@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import "../globals.css";
-import { fontMono, fontSans, fontSerif } from "@/fonts";
+import { fontSans, fontSerif } from "@/fonts";
 import { hasLocale, localeMeta, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { siteConfig, whatsappLink } from "@/config/site";
@@ -17,7 +17,7 @@ export function generateStaticParams() {
 }
 
 export const viewport: Viewport = {
-  themeColor: "#fbfaf7",
+  themeColor: "#f5f3ee",
   width: "device-width",
   initialScale: 1,
 };
@@ -63,17 +63,17 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
   return (
     <html
       lang={localeMeta[lang].htmlLang}
-      className={`${fontSans.variable} ${fontSerif.variable} ${fontMono.variable}`}
+      className={`${fontSans.variable} ${fontSerif.variable}`}
       suppressHydrationWarning
     >
       <head>
         {/* Activa animaciones de aparición solo si hay JS (el contenido nunca queda oculto sin JS) */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
-      <body className="flex min-h-dvh flex-col bg-sand-50 text-ink antialiased">
+      <body className="flex min-h-dvh flex-col bg-paper text-ink antialiased">
         <a
           href="#contenido"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-petrol-900 focus:px-5 focus:py-3 focus:text-sand-50"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-paper"
         >
           {dict.common.skip}
         </a>
@@ -82,7 +82,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
           {children}
         </main>
         <Footer dict={dict} lang={lang} />
-        <WhatsAppFloat href={whatsappLink(dict.whatsapp.defaultMessage)} label={dict.whatsapp.floating} />
+        <WhatsAppFloat href={whatsappLink(dict.whatsapp.defaultMessage)} label={dict.whatsapp.label} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(buildJsonLd(dict)).replace(/</g, "\\u003c") }}

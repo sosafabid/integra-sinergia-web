@@ -25,7 +25,7 @@ export function buildJsonLd(dict: Dictionary) {
         availableLanguage: ["es", "en"],
         hasOfferCatalog: {
           "@type": "OfferCatalog",
-          name: dict.solutions.kicker,
+          name: dict.pages.solutions.title,
           itemListElement: dict.solutions.areas.map((a) => ({
             "@type": "Offer",
             itemOffered: { "@type": "Service", name: a.name, description: a.short },

@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: paths.home, priority: 1 },
     { path: paths.solutions, priority: 0.9 },
     ...areaIds.map((id) => ({ path: solutionPath(id), priority: 0.8 })),
+    { path: paths.projects, priority: 0.7 },
     { path: paths.method, priority: 0.6 },
     { path: paths.about, priority: 0.6 },
     { path: paths.contact, priority: 0.7 },

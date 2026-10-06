@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { hasLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { pageMetadata } from "@/lib/metadata";
-import { paths, route } from "@/lib/routes";
+import { paths } from "@/lib/routes";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Contact } from "@/components/sections/Contact";
 
@@ -18,20 +18,12 @@ export default async function ContactPage({ params }: PageProps<"/[lang]/contact
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
   const dict = await getDictionary(lang);
-  const { contact, ui } = dict;
+  const { contact } = dict;
 
   return (
     <>
-      <PageHeader
-        crumbs={[
-          { href: route(lang, "home"), label: ui.breadcrumbHome },
-          { href: route(lang, "contact"), label: contact.kicker },
-        ]}
-        kicker={contact.kicker}
-        title={contact.title}
-        lead={contact.lead}
-      />
-      <Contact dict={dict} lang={lang} withHeader={false} />
+      <PageHeader kicker={contact.kicker} title={contact.title} lead={contact.lead} />
+      <Contact dict={dict} lang={lang} />
     </>
   );
 }

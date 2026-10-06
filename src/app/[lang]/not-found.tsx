@@ -10,11 +10,11 @@ export default async function NotFound() {
   const dict = await getDictionary(lang);
 
   return (
-    <div className="grid-bg flex min-h-[80dvh] flex-col items-center justify-center px-5 pt-20 text-center">
-      <p className="eyebrow text-sand-700">404</p>
-      <h1 className="display-2 mt-4 max-w-xl text-petrol-900">{dict.notFound.title}</h1>
-      <p className="lead mt-4 text-ink-soft">{dict.notFound.text}</p>
-      <ButtonLink href={route(lang, "home")} className="mt-10">
+    <div className="wrap flex min-h-[80dvh] flex-col justify-end pb-24 pt-40">
+      <p className="t-caption text-sand-deep">404</p>
+      <h1 className="t-h1 mt-6 max-w-[14ch] text-ink">{dict.notFound.title}</h1>
+      <p className="t-lead mt-6 text-ink-2">{dict.notFound.text}</p>
+      <ButtonLink href={route(lang, "home")} className="mt-10 self-start">
         {dict.notFound.cta}
       </ButtonLink>
     </div>

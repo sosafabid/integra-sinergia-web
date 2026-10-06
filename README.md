@@ -71,63 +71,42 @@ npm run start   # sirve el build localmente
 
 | Quiero cambiar… | Archivo |
 |---|---|
-| Textos en español | `src/content/es.ts` |
-| Textos en inglés | `src/content/en.ts` |
+| Textos en español / inglés | `src/content/es.ts` / `src/content/en.ts` |
 | Email, teléfonos, WhatsApp, dominio | `src/config/site.ts` |
-| Colores, tipografía, espaciados | `src/app/globals.css` (bloque `@theme`) |
-| Contenido del inicio | `src/app/[lang]/page.tsx` |
-| Páginas internas | `src/app/[lang]/soluciones`, `metodologia`, `nosotros`, `contacto` |
-| URLs de las soluciones | `src/lib/routes.ts` |
-| Logo | `public/brand/` |
+| Colores y tipografía | `src/app/globals.css` (bloque `@theme` y clases `.t-*`) |
+| Orden de la home | `src/app/[lang]/page.tsx` |
+| Proyectos | `projects.items` en `es.ts` / `en.ts` + imagen en `public/showcase/` |
 | Fotos del equipo | `public/team/` + campo `photo` en `es.ts` / `en.ts` |
-| Proyectos / casos | `projects.items` en `es.ts` / `en.ts` (la sección aparece sola cuando hay al menos uno) |
+| Pasos del método | `method.steps` en `es.ts` / `en.ts` |
+| Logo | `public/brand/` |
 
 ## 7. Mapa del sitio
 
 ```
-/es                     Inicio: visión general + accesos a las 6 soluciones
-/es/soluciones          Todas las soluciones + enfoque integrado
-/es/soluciones/gestion-procesos-sistemas
-/es/soluciones/sostenibilidad-gestion-ambiental
-/es/soluciones/cumplimiento-gestion-administrativa
-/es/soluciones/datos-indicadores-mejora
-/es/soluciones/automatizacion-inteligencia-artificial   (+ bloque ampliado de IA)
-/es/soluciones/diseno-desarrollo-web                    (+ bloque ampliado de diseño web)
-/es/metodologia         Metodología CRECE
-/es/nosotros            Equipo, por qué existimos, para quién (y proyectos cuando existan)
+/es                     Inicio: hero, manifiesto, piezas, diseño y tecnología, método, proyectos, equipo, CTA
+/es/soluciones          Los 4 conceptos (Gestión, Sostenibilidad, Tecnología, Presencia digital)
+/es/soluciones/<área>   6 páginas de detalle (diseño web y automatización con bloques propios)
+/es/proyectos           Proyectos (problema → solución)
+/es/nosotros            La firma y el equipo
+/es/metodologia         Comprender → Estandarizar → Mejorar → Escalar
 /es/contacto            Formulario + WhatsApp + correo (acepta ?area=web para preseleccionar)
 ```
 Lo mismo en inglés bajo `/en/...`.
 
-## 8. Estructura de código
+## 8. Sistema visual
 
-```
-src/
-  app/
-    [lang]/            → layout (menú + footer), inicio, páginas internas, 404, imagen Open Graph
-    sitemap.ts, robots.ts, icon.png, apple-icon.png, favicon.ico
-    globals.css        → sistema visual
-  components/
-    layout/            → Navbar, Footer, WhatsApp flotante
-    sections/          → bloques de contenido reutilizados por las páginas
-    solutions/         → tarjetas de soluciones y detalle de cada solución
-    home/              → accesos del inicio
-    ui/                → botones, encabezados, íconos, logo, animación de aparición
-  content/             → textos ES/EN (tipados con types.ts)
-  config/site.ts       → datos de contacto y variables
-  i18n/                → idiomas y carga de diccionarios
-  lib/                 → datos estructurados (schema.org), eventos del formulario
-  fonts/               → fuentes autoalojadas (Manrope, Instrument Serif, IBM Plex Mono — licencia OFL)
-  proxy.ts             → redirige "/" al idioma del visitante
-```
+- **Tipografías (2):** Instrument Serif para titulares, Hanken Grotesk para interfaz y texto. Autoalojadas en `src/fonts/`.
+- **Escala:** `.t-display`, `.t-h1`, `.t-h2`, `.t-h3`, `.t-lead`, `.t-caption`.
+- **Color:** papel `#F5F3EE` y carbón `#141B1B` como base. Azul petróleo `#0A3740` solo en la sección de diseño y tecnología. Verde y arena como acentos.
+- **Estructura:** `src/components/ui/Structure.tsx` es la geometría inspirada en el isotipo (no es el logo).
+- **Capturas del sitio** (`public/showcase/`): si cambia el hero, conviene volver a tomarlas.
 
 ## 9. Pendientes antes del lanzamiento
 
 - [ ] **Logo en SVG** (los PNG actuales se recortaron de la tarjeta oficial; reemplazar en `public/brand/`).
 - [ ] **Fotos profesionales** de Fabiola y María Celeste (`public/team/`, formato 4:5, ~1200×1500 px).
 - [ ] Validar **biografías** del equipo.
-- [ ] Validar etapas de la **Metodología CRECE** (Comprender, Rediseñar, Ejecutar, Consolidar, Escalar).
-- [ ] Validar **sectores** prioritarios.
+- [ ] Validar los textos de cada etapa del **método** (Comprender, Estandarizar, Mejorar, Escalar).
 - [ ] Confirmar **WhatsApp comercial** y **correo** definitivo (idealmente un correo con el dominio).
 - [ ] Crear el formulario en **Formspree** y configurar `NEXT_PUBLIC_FORMSPREE_ID`.
 - [ ] Agregar **proyectos reales** autorizados.
